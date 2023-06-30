@@ -10,7 +10,7 @@ body {
   background-color: #20cc233d;
   color: rgba(0, 0, 0, 0.9);
 }
-.App{
+.auth-form, .start-container{
     text-align: center;
     display: flex;
     min-height: 100vh;
@@ -56,3 +56,13 @@ button{
     text-decoration: underline;
     border: none;
 }
+
+/* START PAGE */
+  .img-start {
+    width: 100vh;
+    height: 100vh;
+    background-image: url("../img/startPage.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  

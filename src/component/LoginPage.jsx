@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import RegisterPage from "./RegisterPage";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from "../api/axios";
 import { Link } from "react-router-dom";
@@ -71,7 +70,7 @@ const LoginPage = (props) => {
           <h1>Bentornato!</h1>
           <br />
           <p>
-            <a href="#">Vai alla Home</a>
+            <Link to="/home"> Vai alla Home</Link>
           </p>
         </section>
       ) : (
@@ -88,10 +87,11 @@ const LoginPage = (props) => {
               <Col>
                 <h1>Login</h1>
                 <Form className="login-form" onSubmit={handleSubmit}>
-                  <Form.Group controlId="formBasicEmail">
+                  <Form.Group controlId="username">
                     <label className="label">Username:</label>
                     <Form.Control
                       type="text"
+                      id="username"
                       ref={userRef}
                       placeholder="Enter username"
                       value={username}
@@ -103,11 +103,11 @@ const LoginPage = (props) => {
                     </Form.Text>
                   </Form.Group>
 
-                  <Form.Group controlId="formBasicPassword">
+                  <Form.Group controlId="password">
                     <label className="label">Password:</label>
                     <Form.Control
                       type="password"
-                      ì
+                      id="password"
                       placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -125,7 +125,7 @@ const LoginPage = (props) => {
                   onClick={props.onFormSwitch}
                 >
                   Non hai un account?
-                  <Link to="/register">Registrati qui!</Link>
+                  <Link to="/register"> Registrati qui!</Link>
                 </Button>
               </Col>
             </Row>

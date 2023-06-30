@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import LoginPage from "./LoginPage";
 import { Form, Button } from "react-bootstrap";
 import axios from "../api/axios";
 import { Link } from "react-router-dom";
@@ -77,7 +76,7 @@ const RegisterPage = (props) => {
           <h1>Benvenuto!</h1>
           <br />
           <p>
-            <a href="#">Vai alla Home</a>
+            <Link to="/home"> Vai alla Home</Link>
           </p>
         </section>
       ) : (
@@ -91,10 +90,11 @@ const RegisterPage = (props) => {
           </p>
           <h1>Registrazione</h1>
           <Form className="register-form" onSubmit={handleSubmit}>
-            <Form.Group controlId="text">
+            <Form.Group controlId="nome">
               <Form.Label className="label">Nome</Form.Label>
               <Form.Control
                 type="text"
+                id="nome"
                 ref={userRef}
                 placeholder="Inserisci il tuo nome"
                 value={name}
@@ -103,7 +103,7 @@ const RegisterPage = (props) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="cognome">
               <Form.Label className="label">Cognome</Form.Label>
               <Form.Control
                 type="text"
@@ -116,7 +116,7 @@ const RegisterPage = (props) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="username">
               <Form.Label className="label">Username</Form.Label>
               <Form.Control
                 type="text"
@@ -129,7 +129,7 @@ const RegisterPage = (props) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group controlId="email">
               <Form.Label className="label">email</Form.Label>
               <Form.Control
                 type="email"
@@ -142,11 +142,11 @@ const RegisterPage = (props) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group controlId="password">
               <Form.Label className="label">Password</Form.Label>
               <Form.Control
                 type="password"
-                id="nome"
+                id="password"
                 ref={userRef}
                 placeholder="Password"
                 value={password}
@@ -165,7 +165,7 @@ const RegisterPage = (props) => {
             onClick={props.onFormSwitch}
           >
             Hai già un account?
-            <Link to="/login">Login.</Link>
+            <Link to="/login"> Accedi!</Link>
           </Button>
         </div>
       )}
