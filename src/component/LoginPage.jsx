@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import RegisterPage from "./RegisterPage";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
+import { Link } from "react-router-dom";
 
 const LOGIN_URL = "/auth/login";
 
@@ -18,6 +18,7 @@ const LoginPage = (props) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
   const [succes, setSucces] = useState(false);
 
@@ -67,7 +68,7 @@ const LoginPage = (props) => {
     <>
       {succes ? (
         <section>
-          <h1>Benvenuto!</h1>
+          <h1>Bentornato!</h1>
           <br />
           <p>
             <a href="#">Vai alla Home</a>
@@ -86,8 +87,6 @@ const LoginPage = (props) => {
             <Row>
               <Col>
                 <h1>Login</h1>
-                {/* {errorMessage && <div className="error-message">{errorMessage}</div>} */}
-
                 <Form className="login-form" onSubmit={handleSubmit}>
                   <Form.Group controlId="formBasicEmail">
                     <label className="label">Username:</label>
@@ -125,7 +124,8 @@ const LoginPage = (props) => {
                   className="link-btn"
                   onClick={props.onFormSwitch}
                 >
-                  Non hai un account? Registrati qui!
+                  Non hai un account?
+                  <Link to="/register">Registrati qui!</Link>
                 </Button>
               </Col>
             </Row>

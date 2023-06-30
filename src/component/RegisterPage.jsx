@@ -1,79 +1,175 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import AuthContext from "../context/AuthProvider";
 import LoginPage from "./LoginPage";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
+import axios from "../api/axios";
+import { Link } from "react-router-dom";
+
+const REGISTER_URL = "/auth/register";
+
+const saveTokenToLocalStorage = (token) => {
+  localStorage.setItem("accessToken", token);
+};
 
 const RegisterPage = (props) => {
+  const { setAuth } = useContext(AuthContext);
+  const userRef = useRef();
+  const errRef = useRef();
+
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [succes, setSucces] = useState(false);
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrorMessage("");
+  }, [name, surname, username, email, password]);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const response = await axios.post(
+        REGISTER_URL,
+        JSON.stringify({ name, surname, username, email, password }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      const accessToken = response?.data?.accessToken;
+      saveTokenToLocalStorage(accessToken);
+      console.log("token salvato nel localstorage", accessToken);
+      const roles = response?.data?.roles;
+      setAuth({ name, surname, username, email, password, roles, accessToken });
+      setName("");
+      setSurname("");
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setSucces(true);
+    } catch (error) {
+      if (!error?.response) {
+        setErrorMessage("il server non risponde");
+      } else if (error.response?.status === 400) {
+        setErrorMessage("Manca username o password");
+      } else if (error.response?.status === 401) {
+        setErrorMessage("non sei autorizzato");
+      } else {
+        setErrorMessage("registrazione fallita");
+      }
+      errRef.current.focus();
+    }
   };
 
   return (
-    <div className="auth-form">
-      <Form className="register-form" onSubmit={handleSubmit}>
-        <Form.Group controlId="text">
-          <label className="label">Nome</label>
-          <Form.Control
-            type="text"
-            placeholder="Inserisci il tuo nome"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </Form.Group>
+    <>
+      {succes ? (
+        <section>
+          <h1>Benvenuto!</h1>
+          <br />
+          <p>
+            <a href="#">Vai alla Home</a>
+          </p>
+        </section>
+      ) : (
+        <div className="auth-form">
+          <p
+            ref={errRef}
+            className={errorMessage ? "errorMessage" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errorMessage}
+          </p>
+          <h1>Registrazione</h1>
+          <Form className="register-form" onSubmit={handleSubmit}>
+            <Form.Group controlId="text">
+              <Form.Label className="label">Nome</Form.Label>
+              <Form.Control
+                type="text"
+                ref={userRef}
+                placeholder="Inserisci il tuo nome"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
-          <label className="label">Cognome</label>
-          <Form.Control
-            type="text"
-            placeholder="Inserisci il tuo cognome"
-            value={surname}
-            onChange={(e) => setSurname(e.target.value)}
-          />
-        </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label className="label">Cognome</Form.Label>
+              <Form.Control
+                type="text"
+                id="cognome"
+                ref={userRef}
+                placeholder="Inserisci il tuo cognome"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
-          <label className="label">Username</label>
-          <Form.Control
-            type="text"
-            placeholder="Enter username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label className="label">Username</Form.Label>
+              <Form.Control
+                type="text"
+                id="username"
+                ref={userRef}
+                placeholder="Enter username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
-          <label className="label">email</label>
-          <Form.Control
-            type="email"
-            placeholder="Inserisci la tua email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label className="label">email</Form.Label>
+              <Form.Control
+                type="email"
+                id="email"
+                ref={userRef}
+                placeholder="Inserisci la tua email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <label className="label">Password</label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label className="label">Password</Form.Label>
+              <Form.Control
+                type="password"
+                id="nome"
+                ref={userRef}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-        <Button variant="white" type="submit">
-          Registrati!
-        </Button>
-      </Form>
-      <Button variant="white" className="link-btn" onClick={props.onFormSwitch}>
-        Hai già un account? Login.
-      </Button>
-    </div>
+            <Button variant="white" type="submit">
+              Registrati!
+            </Button>
+          </Form>
+          <Button
+            variant="white"
+            className="link-btn"
+            onClick={props.onFormSwitch}
+          >
+            Hai già un account?
+            <Link to="/login">Login.</Link>
+          </Button>
+        </div>
+      )}
+    </>
   );
 };
 
