@@ -1,0 +1,58 @@
+/* ---------- RESET ---------- */
+a,
+.btnLink {
+  text-decoration: none;
+  color: rgb(10, 102, 194);
+  font-weight: 600;
+}
+body {
+  /* background-color: rgba(243, 242, 239); */
+  background-color: #20cc233d;
+  color: rgba(0, 0, 0, 0.9);
+}
+.App{
+    text-align: center;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-image: linear-gradient(79deg, #0f9074, #0dc987cc 48%, #2ac41c98);
+}
+
+/* LOGIN & REGISTER */
+.auth-form, .login-form, .register-form{
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (min-width: 600px){   
+    .auth-form{
+        padding: 5rem;
+        border: 1px solid white;
+        border-radius: 10px;
+        margin: 0.5rem;
+    }
+}
+.label{
+    padding: 0.25rem 0;
+}
+/* input{
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+}
+button{
+    border: none;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #7439db;
+} */
+.link-btn{
+    background: none;
+    color: white;
+    text-decoration: underline;
+    border: none;
+}
