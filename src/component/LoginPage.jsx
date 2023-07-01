@@ -46,7 +46,7 @@ const LoginPage = (props) => {
       console.log("token salvato nel localstorage", accessToken);
       const roles = response?.data?.roles;
       setAuth({ username, password, roles, accessToken });
-      setUsername("");
+      setUsername(username);
       setPassword("");
       setSucces(true);
     } catch (error) {
@@ -66,8 +66,8 @@ const LoginPage = (props) => {
   return (
     <>
       {succes ? (
-        <section>
-          <h1>Bentornato!</h1>
+        <section className="access flex-column">
+          <h1>Bentornato, {username}!</h1>
           <br />
           <p>
             <Link to="/home"> Vai alla Home</Link>
@@ -91,7 +91,6 @@ const LoginPage = (props) => {
                     <label className="label">Username:</label>
                     <Form.Control
                       type="text"
-                      id="username"
                       ref={userRef}
                       placeholder="Enter username"
                       value={username}
@@ -107,7 +106,6 @@ const LoginPage = (props) => {
                     <label className="label">Password:</label>
                     <Form.Control
                       type="password"
-                      id="password"
                       placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}

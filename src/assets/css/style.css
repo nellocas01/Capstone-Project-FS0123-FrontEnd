@@ -10,7 +10,7 @@ body {
   background-color: #20cc233d;
   color: rgba(0, 0, 0, 0.9);
 }
-.auth-form, .start-container{
+.auth-form, .start-container, .access{
     text-align: center;
     display: flex;
     min-height: 100vh;

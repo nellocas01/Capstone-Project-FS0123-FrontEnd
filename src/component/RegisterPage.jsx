@@ -49,7 +49,7 @@ const RegisterPage = (props) => {
       console.log("token salvato nel localstorage", accessToken);
       const roles = response?.data?.roles;
       setAuth({ name, surname, username, email, password, roles, accessToken });
-      setName("");
+      setName(name);
       setSurname("");
       setUsername("");
       setEmail("");
@@ -72,8 +72,8 @@ const RegisterPage = (props) => {
   return (
     <>
       {succes ? (
-        <section>
-          <h1>Benvenuto!</h1>
+        <section className="access flex-column">
+          <h1>Benvenuto, {name}!</h1>
           <br />
           <p>
             <Link to="/home"> Vai alla Home</Link>
@@ -94,7 +94,6 @@ const RegisterPage = (props) => {
               <Form.Label className="label">Nome</Form.Label>
               <Form.Control
                 type="text"
-                id="nome"
                 ref={userRef}
                 placeholder="Inserisci il tuo nome"
                 value={name}
@@ -107,7 +106,6 @@ const RegisterPage = (props) => {
               <Form.Label className="label">Cognome</Form.Label>
               <Form.Control
                 type="text"
-                id="cognome"
                 ref={userRef}
                 placeholder="Inserisci il tuo cognome"
                 value={surname}
@@ -120,7 +118,6 @@ const RegisterPage = (props) => {
               <Form.Label className="label">Username</Form.Label>
               <Form.Control
                 type="text"
-                id="username"
                 ref={userRef}
                 placeholder="Enter username"
                 value={username}
@@ -133,7 +130,6 @@ const RegisterPage = (props) => {
               <Form.Label className="label">email</Form.Label>
               <Form.Control
                 type="email"
-                id="email"
                 ref={userRef}
                 placeholder="Inserisci la tua email"
                 value={email}
@@ -146,7 +142,6 @@ const RegisterPage = (props) => {
               <Form.Label className="label">Password</Form.Label>
               <Form.Control
                 type="password"
-                id="password"
                 ref={userRef}
                 placeholder="Password"
                 value={password}

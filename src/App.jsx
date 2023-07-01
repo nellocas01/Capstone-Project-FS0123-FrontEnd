@@ -6,6 +6,8 @@ import StartPage from "./component/StartPage";
 import LoginPage from "./component/LoginPage";
 import RegisterPage from "./component/RegisterPage";
 import HomePage from "./component/HomePage";
+import FooterComponent from "./component/FooterComponent";
+import NavbarComponent from "./component/NavbarComponent";
 
 function App() {
   return (
