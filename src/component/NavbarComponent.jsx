@@ -29,8 +29,8 @@ const NavbarComponent = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="me-auto">
-                  <Nav.Link to="/home">Home</Nav.Link>
-                  <Nav.Link to="/partite">Partite</Nav.Link>
+                  <Nav.Link href="/home">Home</Nav.Link>
+                  <Nav.Link href="/partite">Partite</Nav.Link>
                   <Nav.Link href="/login">Logout</Nav.Link>
                 </Nav>
               </Offcanvas.Body>

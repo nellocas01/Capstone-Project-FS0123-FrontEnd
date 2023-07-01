@@ -6,8 +6,7 @@ import StartPage from "./component/StartPage";
 import LoginPage from "./component/LoginPage";
 import RegisterPage from "./component/RegisterPage";
 import HomePage from "./component/HomePage";
-import FooterComponent from "./component/FooterComponent";
-import NavbarComponent from "./component/NavbarComponent";
+import Dashboard from "./component/Dashboard";
 
 function App() {
   return (
@@ -18,6 +17,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/partite" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
