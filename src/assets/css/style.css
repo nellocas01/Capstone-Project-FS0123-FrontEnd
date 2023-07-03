@@ -10,7 +10,7 @@ body {
   background-color: #20cc233d;
   color: rgba(0, 0, 0, 0.9);
 }
-.auth-form, .start-container, .access{
+.auth-form, .access{
     text-align: center;
     display: flex;
     min-height: 100vh;
@@ -30,26 +30,12 @@ body {
         padding: 5rem;
         border: 1px solid white;
         border-radius: 10px;
-        margin: 0.5rem;
+        margin-inline: 5rem;
     }
 }
 .label{
     padding: 0.25rem 0;
 }
-/* input{
-    margin: 0.5rem 0;
-    padding: 1rem;
-    border: none;
-    border-radius: 10px;
-}
-button{
-    border: none;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #7439db;
-} */
 .link-btn{
     background: none;
     color: white;
@@ -60,9 +46,12 @@ button{
 /* START PAGE */
   .img-start {
     width: 100vh;
-    height: 100vh;
+    height: 60vh;
     background-image: url("../img/startPage.jpg");
     background-size: cover;
     background-position: center;
+    opacity: 0.8;
   }
-  
+  .text-start{
+    color: rgba(26, 77, 3, 0.712);
+  }

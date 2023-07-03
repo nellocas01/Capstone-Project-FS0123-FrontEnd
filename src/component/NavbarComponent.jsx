@@ -1,6 +1,4 @@
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
 import Container from "react-bootstrap/Container";
 import { Xbox } from "react-bootstrap-icons";
 
@@ -8,36 +6,25 @@ const NavbarComponent = () => {
   return (
     <>
       {/* NAVBAR */}
-      {[false].map((expand) => (
-        <Navbar key={expand} expand={expand} bg="success" data-bs-theme="dark">
-          <Container fluid>
-            <div>
-              <Navbar.Brand>
-                StonksBall <Xbox />
-              </Navbar.Brand>
-            </div>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${expand}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-              placement="end"
-            >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title
-                  id={`offcanvasNavbarLabel-expand-${expand}`}
-                ></Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="me-auto">
-                  <Nav.Link href="/home">Home</Nav.Link>
-                  <Nav.Link href="/partite">Partite</Nav.Link>
-                  <Nav.Link href="/login">Logout</Nav.Link>
-                </Nav>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-          </Container>
-        </Navbar>
-      ))}
+      <Navbar bg="success" data-bs-theme="dark">
+        <Container className="d-flex justify-content-center">
+          <Navbar.Brand href="/home" className="text-black">
+            StonksBall <Xbox />
+          </Navbar.Brand>
+          <Navbar.Brand href="/campi" className="mx-5">
+            Campi disponibili
+          </Navbar.Brand>
+          <Navbar.Brand href="/prenotazioni" className="mx-5">
+            Prenota un campo
+          </Navbar.Brand>
+          <Navbar.Brand href="/profilo" className="mx-5">
+            Gestisci il tuo profilo
+          </Navbar.Brand>
+          <Navbar.Brand href="/login" className="mx-5">
+            Esci
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
     </>
   );
 };

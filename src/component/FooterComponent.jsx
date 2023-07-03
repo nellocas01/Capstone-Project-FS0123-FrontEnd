@@ -1,28 +1,35 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { Facebook, Instagram, Twitter, Xbox } from "react-bootstrap-icons";
+import { Facebook, Instagram, Twitter } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 const FooterComponent = () => {
   return (
     <>
       <footer>
-        <Container fluid>
+        <Container className="my-5" fluid>
           <Row>
-            <Col>
-              <h2>
-                StonksBall <Xbox />
-              </h2>
+            <Col md={6}>
+              <h2>seguici sui nostri canali social →</h2>
             </Col>
-            <Col>
-              <a href="https://www.facebook.com/" target="blank">
+            <Col md={6} className="d-flex align-items-center">
+              <a
+                href="https://www.facebook.com/"
+                target="blank"
+                className="mx-5"
+              >
                 <Facebook />
               </a>
-              <a href="https://www.instagram.com/" target="blank">
+              <a
+                href="https://www.instagram.com/"
+                target="blank"
+                className="mx-5"
+              >
                 <Instagram />
               </a>
               <a
                 href="https://twitter.com/i/flow/login?redirect_after_login=%2F%3Flang%3Dit"
                 target="blank"
+                className="mx-5"
               >
                 <Twitter />
               </a>
@@ -38,10 +45,18 @@ const FooterComponent = () => {
           </Row>
           <hr />
           <Row>
-            <Link>The Stonks Studios</Link>
-            <Link>Via Centro Direzionale B8</Link>
-            <Link>Napoli - Italia</Link>
-            <Link>nellocasolla446@gmail.com</Link>
+            <Link className="d-flex justify-content-center">
+              The Stonks Studios
+            </Link>
+            <Link className="d-flex justify-content-center">
+              Via Centro Direzionale B8
+            </Link>
+            <Link className="d-flex justify-content-center">
+              Napoli - Italia
+            </Link>
+            <Link className="d-flex justify-content-center">
+              nellocasolla446@gmail.com
+            </Link>
           </Row>
         </Container>
       </footer>
