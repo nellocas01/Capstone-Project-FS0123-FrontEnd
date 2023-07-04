@@ -12,7 +12,7 @@ const AddPrenotazioneForm = () => {
   });
 
   useEffect(() => {
-    setToken(JSON.parse(localStorage.getItem("token")));
+    setToken(localStorage.getItem("accessToken"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 

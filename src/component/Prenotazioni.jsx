@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion, Alert, Button, Form, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import EditPrenotazioni from "./EditPrenotazioni";
 
 const Prenotazioni = () => {
-  //   const [token, setToken] = useState();
-  //   const [utente, setUtente] = useState({});
+  const [token, setToken] = useState();
+  // const [utente, setUtente] = useState({});
   const [prenotazioni, setPrenotazioni] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -21,12 +21,12 @@ const Prenotazioni = () => {
 
   const navigator = useNavigate();
 
-  //   useEffect(() => {
-  //     setToken(JSON.parse(localStorage.getItem("token")));
-  //     setUtente(JSON.parse(localStorage.getItem("utenteLoggato")));
-  //     fetchListaPrenotazioni(currentPage);
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, [token]);
+  useEffect(() => {
+    setToken(localStorage.getItem("accessToken"));
+    //setUtente(JSON.parse(localStorage.getItem("utente loggato")));
+    fetchListaPrenotazioni(currentPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   useEffect(() => {
     console.log(prenotazioni);
@@ -37,15 +37,6 @@ const Prenotazioni = () => {
     if (dataSearch !== "") {
       url += `data=${dataSearch}&`;
     }
-    // if (dataInserimentoSearch !== "") {
-    //   url += `dataInserimento=${dataInserimentoSearch}&`;
-    // }
-    // if (fatturatoAnnualeSearch !== "") {
-    //   url += `fatturatoAnnuale=${fatturatoAnnualeSearch}&`;
-    // }
-    // if (dataUltimoContattoSearch !== "") {
-    //   url += `dataUltimoContatto=${dataUltimoContattoSearch}&`;
-    // }
     url = url.slice(0, -1);
     setUrl(url);
   };
@@ -60,9 +51,6 @@ const Prenotazioni = () => {
   const handelSubmit = () => {
     componiUrl();
     setDataSearch("");
-    // setDataInserimentoSearch("");
-    // // setFatturatoAnnualeSearch("");
-    // setDataUltimoContattoSearch("");
   };
 
   const goToPage = (pagina) => {
@@ -82,98 +70,98 @@ const Prenotazioni = () => {
   };
 
   const fetchSearch = async (url, pagina) => {
-    // if (token) {
-    console.log(
-      `http://localhost:3001/prenotazioni?${
-        pagina !== undefined ? "page=" + pagina + "&" + url : url
-      }`
-    );
-
-    try {
-      const response = await fetch(
+    if (token) {
+      console.log(
         `http://localhost:3001/prenotazioni?${
           pagina !== undefined ? "page=" + pagina + "&" + url : url
-        }`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            //Authorization: "Bearer " + token,
-          },
-        }
+        }`
       );
-      if (response.ok) {
-        const userData = await response.json();
-        //console.log(userData);
-        setPrenotazioni(userData.content);
-      } else {
-        const errorData = await response.json();
-        console.log(errorData);
+
+      try {
+        const response = await fetch(
+          `http://localhost:3001/prenotazioni?${
+            pagina !== undefined ? "page=" + pagina + "&" + url : url
+          }`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        if (response.ok) {
+          const userData = await response.json();
+          //console.log(userData);
+          setPrenotazioni(userData.content);
+        } else {
+          const errorData = await response.json();
+          console.log(errorData);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
     }
-    // }
   };
 
   const fetchListaPrenotazioni = async (pagina) => {
-    // if (token) {
-    try {
-      const response = await fetch(
-        `http://localhost:3001/prenotazioni?page=${pagina}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: "Bearer " + token,
-          },
+    if (token) {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/prenotazioni?page=${pagina}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        if (response.ok) {
+          const userData = await response.json();
+          //console.log(userData);
+          setPrenotazioni(userData.content);
+          setTotalPages(userData.totalPages);
+        } else {
+          const errorData = await response.json();
+          console.log(errorData);
         }
-      );
-      if (response.ok) {
-        const userData = await response.json();
-        //console.log(userData);
-        setPrenotazioni(userData.content);
-        setTotalPages(userData.totalPages);
-      } else {
-        const errorData = await response.json();
-        console.log(errorData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
     }
-    // }
   };
   const deletePrenotazioni = async (prenotazione) => {
-    // if (token) {
-    try {
-      const response = await fetch(
-        `http://localhost:3001/prenotazioni/${prenotazione.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            //Authorization: "Bearer " + token,
-          },
+    if (token) {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/prenotazioni/${prenotazione.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        if (response.ok) {
+          // const userData = await response.json();
+          // console.log(userData);
+          reset();
+        } else {
+          const errorData = await response.json();
+          console.log(errorData);
         }
-      );
-      if (response.ok) {
-        // const userData = await response.json();
-        // console.log(userData);
-        reset();
-      } else {
-        const errorData = await response.json();
-        console.log(errorData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
     }
-    // }
   };
   return (
     <>
@@ -194,41 +182,6 @@ const Prenotazioni = () => {
                     style={{ background: "#010409", color: "#fff" }}
                   />
                 </Form.Group>
-                {/* <Form.Group className="my-3" controlId="dataInserimentoSearch">
-                  <Form.Label>Data Inserimento</Form.Label>
-                  <Form.Control
-                    type="text"
-                    required
-                    value={dataInserimentoSearch}
-                    onChange={(e) => setDataInserimentoSearch(e.target.value)}
-                    style={{ background: "#010409", color: "#fff" }}
-                  />
-                </Form.Group>
-                <Form.Group className="my-3" controlId="fatturatoAnnualeSearch">
-                  <Form.Label>Fatturato Annuale</Form.Label>
-                  <Form.Control
-                    type="text"
-                    required
-                    value={fatturatoAnnualeSearch}
-                    onChange={(e) => setFatturatoAnnualeSearch(e.target.value)}
-                    style={{ background: "#010409", color: "#fff" }}
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="my-3"
-                  controlId="dataUltimoContattoSearch"
-                >
-                  <Form.Label>Data Ultimo Contatto</Form.Label>
-                  <Form.Control
-                    type="text"
-                    required
-                    value={dataUltimoContattoSearch}
-                    onChange={(e) =>
-                      setDataUltimoContattoSearch(e.target.value)
-                    }
-                    style={{ background: "#010409", color: "#fff" }}
-                  />
-                </Form.Group> */}
                 <Button
                   variant="primary"
                   className="w-100 mb-3"
@@ -264,11 +217,6 @@ const Prenotazioni = () => {
               {prenotazioni.map((prenotazione, index) => (
                 <li key={index}>
                   {prenotazione.data}
-                  {/* - {cliente.partitaIva} -{" "}
-                  {cliente.fatturatoAnnuale} - {cliente.indirizzoLegale.via} -{" "}
-                  {cliente.indirizzoLegale.civico} -{" "}
-                  {cliente.indirizzoLegale.comune.nomeComune} 
-              {utente.ruolo === "ADMIN" && (*/}
                   <>
                     <Button
                       variant="warning"
@@ -311,15 +259,13 @@ const Prenotazioni = () => {
               </Button>
             )}
 
-            {/* {utente.ruolo === "ADMIN" && ( */}
             <Button
               variant="primary"
               className="w-100 mb-3"
-              onClick={() => navigator("/add-prenotazione")}
+              onClick={() => navigator("/add-prenotazioni")}
             >
               Aggiungi Prenotazione
             </Button>
-            {/* )} */}
           </>
         )}
         <Button
@@ -336,7 +282,7 @@ const Prenotazioni = () => {
           reset={() => reset()}
           onHide={() => setShowModal(false)}
           prenotazione={selectedPrenotazione}
-          // token={token}
+          token={token}
         />
       )}
     </>

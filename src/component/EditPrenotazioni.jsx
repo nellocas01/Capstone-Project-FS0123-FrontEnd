@@ -10,6 +10,8 @@ const EditPrenotazione = (props) => {
     setPrenotazione({
       data: props.prenotazione.data,
     });
+    console.log(props.prenotazione);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   const editPrenotazione = async (e) => {
@@ -42,10 +44,12 @@ const EditPrenotazione = (props) => {
       //setError("Si è verificato un errore. Riprova più tardi.");
     }
   };
-  useEffect(() => {
-    console.log("props");
-    console.log(prenotazione);
-  }, [prenotazione]);
+
+  // useEffect(() => {
+  //   console.log("props");
+  //   console.log(prenotazione);
+  // }, [prenotazione]);
+
   return (
     <Modal
       {...props}
