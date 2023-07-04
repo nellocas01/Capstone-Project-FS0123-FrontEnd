@@ -1,7 +1,18 @@
 import { useEffect, useState } from "react";
-import { Accordion, Alert, Button, Form, Spinner } from "react-bootstrap";
+import {
+  Accordion,
+  Alert,
+  Button,
+  Container,
+  Form,
+  ListGroup,
+  ListGroupItem,
+  Spinner,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import EditCampi from "./EditCampi";
+import NavbarComponent from "./NavbarComponent";
+import FooterComponent from "./FooterComponent";
 
 const Campi = () => {
   const [token, setToken] = useState();
@@ -181,12 +192,16 @@ const Campi = () => {
   };
   return (
     <>
-      <div>
-        <h1>Campi</h1>
+      {/* NAVBAR */}
+      <NavbarComponent />
+
+      {/* CAMPI PAGE */}
+      <Container>
+        <h1 className="d-flex justify-content-center m-5">Campi</h1>
         <Accordion className="mb-3">
           <Accordion.Item eventKey="0">
             <Accordion.Header>Filtra Ricerca</Accordion.Header>
-            <Accordion.Body className="bg-black text-white">
+            <Accordion.Body className="bg-success text-white">
               <Form>
                 <Form.Group className="my-3" controlId="nomeSearch">
                   <Form.Label>Nome del campo</Form.Label>
@@ -195,7 +210,7 @@ const Campi = () => {
                     required
                     value={nomeSearch}
                     onChange={(e) => setNomeSearch(e.target.value)}
-                    style={{ background: "#010409", color: "#fff" }}
+                    // style={{ background: "#010409", color: "#fff" }}
                   />
                 </Form.Group>
                 <Form.Group className="my-3" controlId="indirizzoSearch">
@@ -205,7 +220,7 @@ const Campi = () => {
                     required
                     value={indirizzoSearch}
                     onChange={(e) => setIndirizzoSearch(e.target.value)}
-                    style={{ background: "#010409", color: "#fff" }}
+                    //style={{ background: "#010409", color: "#fff" }}
                   />
                 </Form.Group>
                 {/* <Form.Group className="my-3" controlId="fatturatoAnnualeSearch">
@@ -255,7 +270,7 @@ const Campi = () => {
                 Nessun risultato trovato.
               </Alert>
             )}
-            <h2>Lista Campi</h2>
+            <h2 className="d-flex justify-content-center m-5">Lista Campi</h2>
             <Button
               variant="primary"
               className="w-100 mb-3"
@@ -264,21 +279,24 @@ const Campi = () => {
             >
               Reset
             </Button>
-            <ul>
+            <ListGroup numbered>
               {campi.map((campo, index) => (
-                <li key={index}>
+                <ListGroupItem
+                  key={index}
+                  className="m-3 p-2 d-flex text-success"
+                >
                   {campo.nome} - {campo.indirizzo}
                   {/* {utente.ruolo === "ADMIN" && ( */}
                   <>
                     <Button
                       variant="warning"
-                      className="text-light"
+                      className="text-light mx-5 d-flex justify-content-end"
                       onClick={() => {
                         setShowModal(true);
                         setSelectedCampo(campo);
                       }}
                     >
-                      Edit
+                      Modifica
                     </Button>
 
                     <Button variant="danger" onClick={() => deleteCampi(campo)}>
@@ -286,9 +304,9 @@ const Campi = () => {
                     </Button>
                   </>
                   {/* )} */}
-                </li>
+                </ListGroupItem>
               ))}
-            </ul>
+            </ListGroup>
 
             {currentPage > 0 && (
               <Button
@@ -312,7 +330,7 @@ const Campi = () => {
             {/* {utente.ruolo === "ADMIN" && ( */}
             <Button
               variant="primary"
-              className="w-100 mb-3"
+              className="my-5"
               onClick={() => navigator("/add-campo")}
             >
               Aggiungi Campo
@@ -320,14 +338,10 @@ const Campi = () => {
             {/* )} */}
           </>
         )}
-        <Button
-          variant="success"
-          className="w-100 mb-3"
-          onClick={() => navigator("/home")}
-        >
-          Torna alla home
-        </Button>
-      </div>
+
+        {/* FOOTER */}
+        <FooterComponent />
+      </Container>
       {showModal && (
         <EditCampi
           show={showModal}

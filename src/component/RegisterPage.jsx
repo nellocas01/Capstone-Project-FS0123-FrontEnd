@@ -12,7 +12,7 @@ const saveTokenToLocalStorage = (token) => {
 
 const RegisterPage = (props) => {
   const { setAuth } = useContext(AuthContext);
-  const userRef = useRef();
+  const userRef = useRef(null);
   const errRef = useRef();
 
   const [name, setName] = useState("");
@@ -25,7 +25,9 @@ const RegisterPage = (props) => {
   const [succes, setSucces] = useState(false);
 
   useEffect(() => {
-    userRef.current.focus();
+    if (userRef.current) {
+      userRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
@@ -40,11 +42,12 @@ const RegisterPage = (props) => {
         JSON.stringify({ name, surname, username, email, password }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
         }
       );
       console.log(JSON.stringify(response?.data));
+      //const accessToken = response?.data?.accessToken;
       const accessToken = response?.data?.accessToken;
+      console.log("accessToken", accessToken);
       saveTokenToLocalStorage(accessToken);
       console.log("token salvato nel localstorage", accessToken);
       const roles = response?.data?.roles;
@@ -142,7 +145,6 @@ const RegisterPage = (props) => {
               <Form.Label className="label">Password</Form.Label>
               <Form.Control
                 type="password"
-                ref={userRef}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

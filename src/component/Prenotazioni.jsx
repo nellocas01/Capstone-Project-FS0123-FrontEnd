@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Accordion, Alert, Button, Form, Spinner } from "react-bootstrap";
+import {
+  Accordion,
+  Alert,
+  Button,
+  Container,
+  Form,
+  ListGroup,
+  ListGroupItem,
+  Spinner,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import EditPrenotazioni from "./EditPrenotazioni";
+import NavbarComponent from "./NavbarComponent";
+import FooterComponent from "./FooterComponent";
 
 const Prenotazioni = () => {
   const [token, setToken] = useState();
@@ -165,12 +176,16 @@ const Prenotazioni = () => {
   };
   return (
     <>
-      <div>
-        <h1>Prenotazioni</h1>
+      {/* NAVBAR */}
+      <NavbarComponent />
+
+      {/* PRENOTAZIONI PAGE */}
+      <Container>
+        <h1 className="d-flex justify-content-center m-5">Prenotazioni</h1>
         <Accordion className="mb-3">
           <Accordion.Item eventKey="0">
             <Accordion.Header>Filtra Ricerca</Accordion.Header>
-            <Accordion.Body className="bg-black text-white">
+            <Accordion.Body className="bg-success text-white">
               <Form>
                 <Form.Group className="my-3" controlId="dataSearch">
                   <Form.Label>Data</Form.Label>
@@ -179,7 +194,7 @@ const Prenotazioni = () => {
                     required
                     value={dataSearch}
                     onChange={(e) => setDataSearch(e.target.value)}
-                    style={{ background: "#010409", color: "#fff" }}
+                    //style={{ background: "#010409", color: "#fff" }}
                   />
                 </Form.Group>
                 <Button
@@ -204,7 +219,9 @@ const Prenotazioni = () => {
                 Nessun risultato trovato.
               </Alert>
             )}
-            <h2>Lista Prenotazioni</h2>
+            <h2 className="d-flex justify-content-center m-5">
+              Lista Prenotazioni
+            </h2>
             <Button
               variant="primary"
               className="w-100 mb-3"
@@ -213,20 +230,23 @@ const Prenotazioni = () => {
             >
               Reset
             </Button>
-            <ul>
+            <ListGroup numbered>
               {prenotazioni.map((prenotazione, index) => (
-                <li key={index}>
+                <ListGroupItem
+                  key={index}
+                  className="m-3 p-2 d-flex text-success"
+                >
                   {prenotazione.data}
                   <>
                     <Button
                       variant="warning"
-                      className="text-light"
+                      className="text-light mx-5 d-flex justify-content-end"
                       onClick={() => {
                         setShowModal(true);
                         setSelectedPrenotazione(prenotazione);
                       }}
                     >
-                      Edit
+                      Modifica la tua prenotazione
                     </Button>
 
                     <Button
@@ -236,9 +256,9 @@ const Prenotazioni = () => {
                       X
                     </Button>
                   </>
-                </li>
+                </ListGroupItem>
               ))}
-            </ul>
+            </ListGroup>
 
             {currentPage > 0 && (
               <Button
@@ -261,21 +281,16 @@ const Prenotazioni = () => {
 
             <Button
               variant="primary"
-              className="w-100 mb-3"
+              className="my-5"
               onClick={() => navigator("/add-prenotazioni")}
             >
               Aggiungi Prenotazione
             </Button>
           </>
         )}
-        <Button
-          variant="success"
-          className="w-100 mb-3"
-          onClick={() => navigator("/home")}
-        >
-          Torna alla home
-        </Button>
-      </div>
+        {/* FOOTER */}
+        <FooterComponent />
+      </Container>
       {showModal && (
         <EditPrenotazioni
           show={showModal}
