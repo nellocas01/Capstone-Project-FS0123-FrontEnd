@@ -6,10 +6,6 @@ import { Link } from "react-router-dom";
 
 const REGISTER_URL = "/auth/register";
 
-const saveTokenToLocalStorage = (token) => {
-  localStorage.setItem("accessToken", token);
-};
-
 const RegisterPage = (props) => {
   const { setAuth } = useContext(AuthContext);
   const userRef = useRef(null);
@@ -44,14 +40,8 @@ const RegisterPage = (props) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(JSON.stringify(response?.data));
-      //const accessToken = response?.data?.accessToken;
-      const accessToken = response?.data?.accessToken;
-      console.log("accessToken", accessToken);
-      saveTokenToLocalStorage(accessToken);
-      console.log("token salvato nel localstorage", accessToken);
       const roles = response?.data?.roles;
-      setAuth({ name, surname, username, email, password, roles, accessToken });
+      setAuth({ name, surname, username, email, password, roles });
       setName(name);
       setSurname("");
       setUsername("");
@@ -79,7 +69,7 @@ const RegisterPage = (props) => {
           <h1>Benvenuto, {name}!</h1>
           <br />
           <p>
-            <Link to="/home"> Vai alla Home</Link>
+            <Link to="/login"> Effettua il tuo primo accesso!</Link>
           </p>
         </section>
       ) : (

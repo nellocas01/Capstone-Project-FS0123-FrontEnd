@@ -9,7 +9,7 @@ const FooterComponent = () => {
         <Container className="my-5" fluid>
           <Row>
             <Col md={6}>
-              <h2>seguici sui nostri canali social →</h2>
+              <h2 className="mt-5">seguici sui nostri canali social →</h2>
             </Col>
             <Col md={6} className="d-flex align-items-center">
               <a

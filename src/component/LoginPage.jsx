@@ -67,7 +67,7 @@ const LoginPage = (props) => {
     <>
       {succes ? (
         <section className="access flex-column">
-          <h1>Bentornato, {username}!</h1>
+          <h1>Ciao, {username}!</h1>
           <br />
           <p>
             <Link to="/home"> Vai alla Home</Link>

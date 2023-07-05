@@ -20,7 +20,7 @@ const NavbarComponent = () => {
           <Navbar.Brand href="/profilo" className="mx-5">
             Gestisci il tuo profilo
           </Navbar.Brand>
-          <Navbar.Brand href="/login" className="mx-5">
+          <Navbar.Brand href="/" className="mx-5">
             Esci
           </Navbar.Brand>
         </Container>
