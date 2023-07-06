@@ -66,11 +66,11 @@ const ProfilePage = () => {
       <section className="vh-100" style={{ backgroundColor: "#f4f5f7" }}>
         <Container className="py-5 h-100">
           <Row className="justify-content-center align-items-center h-100">
-            <Col lg="6" className="mb-4 mb-lg-0">
+            <Col lg={6} className="mb-4 mb-lg-0">
               <Card className="mb-3" style={{ borderRadius: ".5rem" }}>
                 <Row className="g-0">
                   <Col
-                    md="4"
+                    md={4}
                     className="gradient-custom text-center text-white"
                     style={{
                       borderTopLeftRadius: ".5rem",
@@ -88,7 +88,7 @@ const ProfilePage = () => {
                     <CardText>Web Designer</CardText>
                     <Pencil far icon="edit mb-5" />
                   </Col>
-                  <Col md="8">
+                  <Col md={8}>
                     <Card.Body className="p-4">
                       <h6 tag="h6">Information</h6>
                       <hr className="mt-0 mb-4" />

@@ -1,5 +1,10 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { Facebook, Instagram, Twitter } from "react-bootstrap-icons";
+import {
+  ArrowRightCircle,
+  Facebook,
+  Instagram,
+  Twitter,
+} from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 const FooterComponent = () => {
@@ -7,11 +12,13 @@ const FooterComponent = () => {
     <>
       <footer>
         <Container className="my-5" fluid>
-          <Row>
+          <Row className="d-flex align-items-center">
             <Col md={6}>
-              <h2 className="mt-5">seguici sui nostri canali social →</h2>
+              <h2>
+                seguici sui nostri canali social <ArrowRightCircle />
+              </h2>
             </Col>
-            <Col md={6} className="d-flex align-items-center">
+            <Col md={6}>
               <a
                 href="https://www.facebook.com/"
                 target="blank"

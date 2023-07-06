@@ -197,7 +197,7 @@ const Campi = () => {
 
       {/* CAMPI PAGE */}
       <Container>
-        <h1 className="d-flex justify-content-center m-5">Campi</h1>
+        <h1 className="d-flex justify-content-center m-5">Campi disponibili</h1>
         <Accordion className="mb-3">
           <Accordion.Item eventKey="0">
             <Accordion.Header>Filtra Ricerca</Accordion.Header>
@@ -270,7 +270,7 @@ const Campi = () => {
                 Nessun risultato trovato.
               </Alert>
             )}
-            <h2 className="d-flex justify-content-center m-5">Lista Campi</h2>
+            {/* <h2 className="d-flex justify-content-center m-5">Lista Campi</h2>
             <Button
               variant="primary"
               className="w-100 mb-3"
@@ -278,8 +278,8 @@ const Campi = () => {
               onClick={reset}
             >
               Reset
-            </Button>
-            <ListGroup numbered>
+            </Button> */}
+            <ListGroup>
               {campi.map((campo, index) => (
                 <ListGroupItem
                   key={index}

@@ -219,7 +219,7 @@ const Prenotazioni = () => {
                 Nessun risultato trovato.
               </Alert>
             )}
-            <h2 className="d-flex justify-content-center m-5">
+            {/* <h2 className="d-flex justify-content-center m-5">
               Lista Prenotazioni
             </h2>
             <Button
@@ -229,8 +229,8 @@ const Prenotazioni = () => {
               onClick={reset}
             >
               Reset
-            </Button>
-            <ListGroup numbered>
+            </Button> */}
+            <ListGroup>
               {prenotazioni.map((prenotazione, index) => (
                 <ListGroupItem
                   key={index}
@@ -246,7 +246,7 @@ const Prenotazioni = () => {
                         setSelectedPrenotazione(prenotazione);
                       }}
                     >
-                      Modifica la tua prenotazione
+                      Modifica
                     </Button>
 
                     <Button

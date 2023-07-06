@@ -6,7 +6,7 @@ const NavbarComponent = () => {
   return (
     <>
       {/* NAVBAR */}
-      <Navbar bg="success" data-bs-theme="dark">
+      <Navbar bg="success" data-bs-theme="dark" expand="lg">
         <Container className="d-flex justify-content-center">
           <Navbar.Brand href="/home" className="text-black">
             StonksBall <Xbox />

@@ -18,6 +18,14 @@ const StartPage = () => {
           <Image className="img-start" />
         </Col>
       </Row>
+      <video
+        src="../assets/img/video.mp4"
+        className="z-depth-1"
+        autoPlay
+        loop
+        controls
+        muted
+      ></video>
     </Container>
   );
 };

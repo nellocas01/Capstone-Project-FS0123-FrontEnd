@@ -7,6 +7,8 @@ import phoneFormazione from "../assets/img/phoneFormazione.jpg";
 import phoneControllo from "../assets/img/phoneControllo.png";
 import NavbarComponent from "./NavbarComponent";
 import FooterComponent from "./FooterComponent";
+import { Link } from "react-router-dom";
+import { HandIndex } from "react-bootstrap-icons";
 
 const HomePage = () => {
   return (
@@ -30,7 +32,11 @@ const HomePage = () => {
                 partite di calcio con gli amici e non solo. <br />
                 Crea o unisciti a Gruppi Partita per giocare e/o organizzare
                 partite di calcio a 5 senza vincoli con le strutture sportive a
-                disposizione e senza costi aggiuntivi.
+                disposizione e senza costi aggiuntivi. Puoi trovare questa
+                sezione in{" "}
+                <Link to="/campi" className="text-dark">
+                  Campi Disponibili <HandIndex />
+                </Link>
               </p>
               <Row className="justify-content-between">
                 <Col>
@@ -65,10 +71,12 @@ const HomePage = () => {
           <Col md={6}>
             <h5>Amministra o iscriviti a Gruppi Partita.</h5>
             <p>
-              StonksBall permette a tutti gli utenti di creare Gruppi Partita e
-              gestirli come Amministratore in tutte le fasi di organizzazione.
-              Inviti al gruppo, convocazioni, composizione squadre e formazioni.
-              Ogni utente può sia giocare che amministrare.
+              StonksBall permette a tutti gli utenti di creare prenotazioni e
+              gestirle come Amministratore in tutte le fasi. Ogni utente può sia
+              giocare che amministrare. Puoi trovare questa sezione in{" "}
+              <Link to="/prenotazioni" className="text-dark">
+                Prenota un campo <HandIndex />
+              </Link>
             </p>
           </Col>
         </Row>
@@ -78,12 +86,15 @@ const HomePage = () => {
               Controlla e gestisci tutto da un unico pannello di controllo.
             </h3>
             <p>
-              Gruppi partita e partite, squadre, formazioni, tabellino, opzioni
-              partita, migliore in campo: tutto gestibile da un unico pannello
-              sia per l’amministratore che per il giocatore.
+              Il tuo profilo personale puoi gestirlo, dove puoi anche aggiungere
+              il tuo ruolo preferito tra: Portiere, Difensore, Centrocampista o
+              Attaccante. Puoi trovare questa sezione in{" "}
+              <Link to="/profilo" className="text-dark">
+                Gestisci il tuo profilo <HandIndex />
+              </Link>
             </p>
           </Col>
-          <Col md={4} className="my-5">
+          <Col md={4} className="my-4">
             <Image src={phoneControllo} alt="phone-controll" width={300} />
           </Col>
         </Row>
