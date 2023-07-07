@@ -8,11 +8,10 @@ import {
   Modal,
   Spinner,
 } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import EditPrenotazioni from "./EditPrenotazioni";
 import NavbarComponent from "./NavbarComponent";
 import FooterComponent from "./FooterComponent";
-import { PencilSquare } from "react-bootstrap-icons";
+import { CheckCircleFill, PencilSquare } from "react-bootstrap-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
@@ -29,7 +28,6 @@ const Prenotazioni = () => {
 
   const [url, setUrl] = useState("");
   const [selectedPrenotazione, setSelectedPrenotazione] = useState("");
-  //const [dataSearch, setDataSearch] = useState("");
 
   const [startDate, setStartDate] = useState(null);
   const [startTime, setStartTime] = useState("16:00");
@@ -58,7 +56,6 @@ const Prenotazioni = () => {
       orario: startTime,
     };
     e.preventDefault();
-    //setError("");
     try {
       const response = await fetch(`http://localhost:3001/prenotazioni`, {
         method: "POST",
@@ -71,31 +68,19 @@ const Prenotazioni = () => {
       if (response.ok) {
         const risposta = await response.json();
         console.log(risposta);
+        setPrenotazioni({ ...prenotazioni, stato: risposta.stato });
       } else {
-        //setError("Credenziali errate. Riprova.");
         const errorData = await response.json();
         console.log(errorData);
       }
     } catch (error) {
       console.log(error);
-      //setError("Si è verificato un errore. Riprova più tardi.");
     }
   };
-
-  const navigator = useNavigate();
 
   useEffect(() => {
     console.log(prenotazioni);
   }, [prenotazioni]);
-
-  // const componiUrl = () => {
-  //   let url = "";
-  //   if (dataSearch !== "") {
-  //     url += `data=${dataSearch}&`;
-  //   }
-  //   url = url.slice(0, -1);
-  //   setUrl(url);
-  // };
 
   useEffect(() => {
     if (url !== "") {
@@ -103,11 +88,6 @@ const Prenotazioni = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
-
-  // const handelSubmit = () => {
-  //   componiUrl();
-  //   setDataSearch("");
-  // };
 
   const goToPage = (pagina) => {
     setCurrentPage(pagina);
@@ -177,7 +157,6 @@ const Prenotazioni = () => {
         );
         if (response.ok) {
           const userData = await response.json();
-          //console.log(userData);
           setPrenotazioni(userData.content);
           setTotalPages(userData.totalPages);
         } else {
@@ -205,8 +184,6 @@ const Prenotazioni = () => {
           }
         );
         if (response.ok) {
-          // const userData = await response.json();
-          // console.log(userData);
           reset();
         } else {
           const errorData = await response.json();
@@ -240,26 +217,35 @@ const Prenotazioni = () => {
             <ListGroup>
               {prenotazioni.map((prenotazione, index) => (
                 <ListGroupItem key={index} className="prenotazioni-list-item">
+                  <p className="me-auto">
+                    Prenotazione {prenotazione.stato} per utente x
+                    {prenotazione.stato === "CONFERMATA" && (
+                      <CheckCircleFill className="ms-auto" color="green" />
+                    )}
+                    {/* confermata = stato.confermata o stato.in attesa - utente = user */}
+                  </p>
                   {prenotazione.data}
-                  <>
-                    <Button
-                      variant="warning"
-                      className="text-light mx-5 d-flex justify-content-end"
-                      onClick={() => {
-                        setShowModal(true);
-                        setSelectedPrenotazione(prenotazione);
-                      }}
-                    >
-                      <PencilSquare />
-                    </Button>
+                  {prenotazione.stato !== "CONFERMATA" && (
+                    <>
+                      <Button
+                        variant="warning"
+                        className="text-light mx-5 d-flex justify-content-end"
+                        onClick={() => {
+                          setShowModal(true);
+                          setSelectedPrenotazione(prenotazione);
+                        }}
+                      >
+                        <PencilSquare />
+                      </Button>
 
-                    <Button
-                      variant="danger"
-                      onClick={() => deletePrenotazioni(prenotazione)}
-                    >
-                      X
-                    </Button>
-                  </>
+                      <Button
+                        variant="danger"
+                        onClick={() => deletePrenotazioni(prenotazione)}
+                      >
+                        X
+                      </Button>
+                    </>
+                  )}
                 </ListGroupItem>
               ))}
             </ListGroup>

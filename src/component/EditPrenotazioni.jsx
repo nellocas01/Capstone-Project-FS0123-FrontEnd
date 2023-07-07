@@ -16,7 +16,6 @@ const EditPrenotazione = (props) => {
 
   const editPrenotazione = async (e) => {
     e.preventDefault();
-    //setError("");
     try {
       const response = await fetch(
         `http://localhost:3001/prenotazioni/${props.prenotazione.id}`,
@@ -35,20 +34,13 @@ const EditPrenotazione = (props) => {
         props.onHide();
         props.reset();
       } else {
-        //setError("Credenziali errate. Riprova.");
         const errorData = await response.json();
         console.log(errorData);
       }
     } catch (error) {
       console.log(error);
-      //setError("Si è verificato un errore. Riprova più tardi.");
     }
   };
-
-  // useEffect(() => {
-  //   console.log("props");
-  //   console.log(prenotazione);
-  // }, [prenotazione]);
 
   return (
     <Modal
