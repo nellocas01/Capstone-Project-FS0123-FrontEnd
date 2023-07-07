@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
 import FooterComponent from "./FooterComponent";
 import NavbarComponent from "./NavbarComponent";
@@ -10,16 +10,66 @@ import {
   Pencil,
   Twitter,
 } from "react-bootstrap-icons";
+import AuthContext from "../context/AuthProvider";
 
 const ProfilePage = () => {
+  const { user } = useContext(AuthContext);
+  //const [token, setToken] = useState();
+  //const [utente, setUser] = useState();
   const [nome, setNome] = useState("");
-  const [cognome, setCognme] = useState("");
+  const [cognome, setCognome] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    // Esegui qui la logica per salvare le modifiche del profilo
-  };
+  useEffect(() => {
+    if (user) {
+      setNome(user.nome);
+      setCognome(user.cognome);
+      setEmail(user.email);
+    }
+  }, [user]);
+
+  // useEffect(() => {
+  //   setToken(localStorage.getItem("accessToken"));
+  //   const loggedInUser = localStorage.getItem("utenteLoggato");
+  //   if (loggedInUser) {
+  //     setUser(JSON.parse(loggedInUser)); // Imposta la variabile di stato user con i dati dell'utente loggato
+  //     fetchUser();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [token]);
+
+  // const fetchUser = async () => {
+  //   if (token) {
+  //     try {
+  //       const response = await fetch(`http://localhost:3001/users`, {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: "Bearer " + token,
+  //         },
+  //       });
+  //       if (response.ok) {
+  //         const userData = await response.json();
+  //         console.log(userData);
+  //         // const loggedUser = userData.content.find(
+  //         //   (user) => user.username === user.username
+  //         // );
+  //         // if (loggedUser) {
+  //         //   setNome(loggedUser.name);
+  //         //   setCognome(loggedUser.surname);
+  //         //   setEmail(loggedUser.email);
+  //         // }
+  //       } else {
+  //         //console.log("Errore durante la richiesta dei campi");
+  //         const errorData = await response.json();
+  //         console.log(errorData);
+  //       }
+  //     } catch (error) {
+  //       console.log("Errore durante la richiesta dell'utente:", error);
+  //     }
+  //   }
+  //   // Esegui qui la logica per salvare le modifiche del profilo
+  // };
 
   return (
     <>
@@ -84,7 +134,7 @@ const ProfilePage = () => {
                       style={{ width: "80px" }}
                       fluid
                     />
-                    <h5>Marie Horwitz</h5>
+                    <h5>{`${nome} ${cognome}`}</h5>
                     <CardText>Web Designer</CardText>
                     <Pencil far icon="edit mb-5" />
                   </Col>

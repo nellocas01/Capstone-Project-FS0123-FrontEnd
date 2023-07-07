@@ -55,6 +55,9 @@ body {
   .text-start{
     color: rgba(26, 77, 3, 0.712);
   }
+  /* .video-start{
+    src: url(../img/video.mp4);
+  } */
 /* PROFILE PAGE */
 .gradient-custom {
   /* fallback for old browsers */
@@ -65,4 +68,44 @@ body {
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+/* CAMPI PAGE */
+.campi-list-group{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #aaf5ac;
+}
+.campi-list-item{
+  border: none;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  background-color: #aaf5ac;
+  /* background-color: #84fa88; */
+}
+@media screen and (max-width: 768px) {
+  .campi-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* PRENOTAZIONI PAGE */
+.prenotazioni-list-item{
+  border: none;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #aaf5ac;
+}
+@media screen and (max-width: 768px) {
+  .prenotazioni-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
