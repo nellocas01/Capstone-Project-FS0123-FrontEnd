@@ -70,6 +70,12 @@ body {
   background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
 }
 /* CAMPI PAGE */
+.datePicker, .timePicker{
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+  justify-content: center;
+}
 .campi-list-group{
   display: flex;
   justify-content: center;
@@ -99,7 +105,8 @@ body {
   margin-bottom: 1.5rem;
   padding: 3rem;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
   background-color: #aaf5ac;
 }
@@ -108,4 +115,8 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
+}
+.btn-attesa{
+  display: flex;
+  margin-top: 1.5rem;
 }

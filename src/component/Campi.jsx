@@ -1,139 +1,60 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
+  Accordion,
+  AccordionContext,
   Alert,
-  Container,
+  Card,
   Image,
   ListGroup,
   ListGroupItem,
   Spinner,
+  useAccordionButton,
 } from "react-bootstrap";
 import NavbarComponent from "./NavbarComponent";
-import FooterComponent from "./FooterComponent";
 import campiImg from "../assets/img/campiImg.jpg";
+import { InfoCircle, Link } from "react-bootstrap-icons";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
 
 const Campi = () => {
   const [token, setToken] = useState();
   const [utente, setUtente] = useState({});
   const [campi, setCampi] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-
-  const [url, setUrl] = useState("");
-  //const [selectedCampo, setSelectedCampo] = useState("");
-  const [nomeSearch, setNomeSearch] = useState("");
-  const [indirizzoSearch, setIndirizzoSearch] = useState("");
-
-  //const [showModal, setShowModal] = useState(false);
-
-  //const navigator = useNavigate();
+  //modale prenotazioone
+  const [fullscreen, setFullscreen] = useState(false);
+  const [show, setShow] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState("16:00");
+  //funzione modale prenotazione
+  function handleShow(breakpoint) {
+    setFullscreen(breakpoint);
+    setShow(true);
+  }
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken"));
     setUtente(localStorage.getItem("utenteLoggato"));
-    fetchListaCampi(currentPage);
+    fetchListaCampi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
-
-  useEffect(() => {
-    console.log(campi);
-  }, [campi]);
-
-  // const componiUrl = () => {
-  //   let url = "";
-  //   if (nomeSearch !== "") {
-  //     url += `nome=${nomeSearch}&`;
-  //   }
-  //   if (indirizzoSearch !== "") {
-  //     url += `indirizzo=${indirizzoSearch}&`;
-  //   }
-  //   url = url.slice(0, -1);
-  //   setUrl(url);
-  // };
-
-  useEffect(() => {
-    if (url !== "") {
-      fetchSearch(url);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
-
-  // const handelSubmit = () => {
-  //   componiUrl();
-  //   setNomeSearch("");
-  //   setIndirizzoSearch("");
-  // };
-
-  // const goToPage = (pagina) => {
-  //   setCurrentPage(pagina);
-  //   setLoading(true);
-  //   if (url.length > 0) {
-  //     fetchSearch(url, pagina);
-  //   } else {
-  //     fetchListaCampi(pagina);
-  //   }
-  // };
-
-  // const reset = () => {
-  //   setUrl("");
-  //   setCurrentPage(0);
-  //   fetchListaCampi(currentPage);
-  // };
-
-  const fetchSearch = async (url, pagina) => {
-    if (token) {
-      console.log(
-        `http://localhost:3001/campi?${
-          pagina !== undefined ? "page=" + pagina + "&" + url : url
-        }`
-      );
-
-      try {
-        const response = await fetch(
-          `http://localhost:3001/campi?${
-            pagina !== undefined ? "page=" + pagina + "&" + url : url
-          }`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-        if (response.ok) {
-          const userData = await response.json();
-          setCampi(userData.content);
-        } else {
-          const errorData = await response.json();
-          console.log("errore durante la richiesta", errorData);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-  };
 
   const fetchListaCampi = async (pagina) => {
     if (token) {
       try {
-        const response = await fetch(
-          `http://localhost:3001/campi?page=${pagina}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
+        const response = await fetch(`http://localhost:3001/campi`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
         if (response.ok) {
           const userData = await response.json();
           //console.log(userData);
           setCampi(userData.content);
-          setTotalPages(userData.totalPages);
         } else {
           const errorData = await response.json();
           console.log(errorData);
@@ -145,128 +66,96 @@ const Campi = () => {
       }
     }
   };
-  // const deleteCampi = async (campo) => {
-  //   if (token) {
-  //     try {
-  //       const response = await fetch(
-  //         `http://localhost:3001/campi/${campo.id}`,
-  //         {
-  //           method: "DELETE",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: "Bearer " + token,
-  //           },
-  //         }
-  //       );
-  //       if (response.ok) {
-  //         reset();
-  //       } else {
-  //         const errorData = await response.json();
-  //         console.log("Errore durante la cancellazione del campo", errorData);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
-  // };
+
+  const PINK = "rgba(255, 192, 203, 0.6)";
+  const BLUE = "rgba(0, 0, 255, 0.6)";
+
+  function ContextAwareToggle({ children, eventKey, callback }) {
+    const { activeEventKey } = useContext(AccordionContext);
+
+    const decoratedOnClick = useAccordionButton(
+      eventKey,
+      () => callback && callback(eventKey)
+    );
+
+    const isCurrentEventKey = activeEventKey === eventKey;
+
+    return (
+      <button
+        type="button"
+        style={{ backgroundColor: isCurrentEventKey ? PINK : BLUE }}
+        onClick={decoratedOnClick}
+      >
+        {children}
+      </button>
+    );
+  }
+
   return (
     <>
       {/* NAVBAR */}
       <NavbarComponent />
 
       {/* CAMPI PAGE */}
-      <Container>
-        <h1 className="d-flex justify-content-center m-5">I nostri Campi</h1>
 
-        {loading ? (
-          <Spinner animation="grow" size="sm" className="me-2" />
-        ) : (
-          <>
-            {campi.length === 0 && (
-              <Alert variant="danger" className="my-3">
-                Nessun risultato trovato.
-              </Alert>
-            )}
-            <ListGroup className="campi-list-group">
-              {campi.map((campo, index) => (
-                <ListGroupItem key={index} className="campi-list-item">
-                  {campo.nome} - {campo.indirizzo}
-                  <Image
-                    src={campiImg}
-                    width={200}
-                    alt="campiImg"
-                    className="mx-5"
-                  />
-                  {/* {utente.ruolo === "ADMIN" && (
-                    <>
-                      <Button
-                        variant="warning"
-                        className="text-light mx-5 d-flex justify-content-end"
-                        onClick={() => {
-                          setShowModal(true);
-                          setSelectedCampo(campo);
-                        }}
-                      >
-                        Modifica
-                      </Button>
+      <h1 className="d-flex justify-content-center m-5">I nostri Campi</h1>
 
-                      <Button
-                        variant="danger"
-                        onClick={() => deleteCampi(campo)}
-                      >
-                        X
-                      </Button>
-                    </>
-                  )} */}
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-
-            {/* {currentPage > 0 && (
-              <Button
-                variant="primary"
-                className="w-100 mb-3"
-                onClick={() => goToPage(currentPage - 1)}
-              >
-                Pagina precedente
-              </Button>
-            )}
-            {currentPage < totalPages - 1 && (
-              <Button
-                variant="primary"
-                className="w-100 mb-3"
-                onClick={() => goToPage(currentPage + 1)}
-              >
-                Pagina successiva
-              </Button>
-            )}
-
-            {utente.ruolo === "ADMIN" && (
-              <Button
-                variant="primary"
-                className="my-5"
-                onClick={() => navigator("/add-campo")}
-              >
-                Aggiungi Campo
-              </Button>
-            )} */}
-          </>
-        )}
-
-        {/* FOOTER */}
-        <FooterComponent />
-      </Container>
-      {/* {showModal && (
-        <EditCampi
-          show={showModal}
-          reset={() => reset()}
-          onHide={() => setShowModal(false)}
-          campo={selectedCampo}
-          token={token}
-        />
-      )} */}
+      {loading ? (
+        <Spinner animation="grow" size="sm" className="me-2" />
+      ) : (
+        <>
+          {campi.length === 0 && (
+            <Alert variant="danger" className="my-3">
+              Nessun risultato trovato.
+            </Alert>
+          )}
+          <ListGroup className="campi-list-group">
+            {campi.map((campo, index) => (
+              <ListGroupItem key={index} className="campi-list-item">
+                {campo.nome} - {campo.indirizzo}
+                <Image
+                  src={campiImg}
+                  width={200}
+                  alt="campiImg"
+                  className="mx-5"
+                />
+                <Accordion defaultActiveKey="0">
+                  <Card>
+                    <Card.Header>
+                      <ContextAwareToggle eventKey="info">
+                        <InfoCircle />
+                      </ContextAwareToggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="info">
+                      <Card.Body>
+                        Il {campo.nome}, situato in {campo.indirizzo}, è un
+                        campetto di calcio a 5, dove per giocare è necessario
+                        formare 2 squadre da 5 per un totale di 10 persone. La
+                        struttura è aperta dalle ore 16 alle 24, la durata della
+                        partita è di 1 ora. Sono disponibili in struttura anche
+                        spogliatoi muniti di docce e asciugacapelli.
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                  <Card>
+                    <Card.Header>
+                      <ContextAwareToggle eventKey="prenotazione">
+                        Prenotazione
+                      </ContextAwareToggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="prenotazione">
+                      <Card.Body>
+                        Non lasciarti perdere questo campo e
+                        <a href="/add-prenotazioni"> Prenotalo qui!</a>
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              </ListGroupItem>
+            ))}
+          </ListGroup>
+        </>
+      )}
     </>
   );
 };

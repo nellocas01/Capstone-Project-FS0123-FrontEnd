@@ -1,10 +1,24 @@
 import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
+import { format, parse } from "date-fns";
 
 const EditPrenotazione = (props) => {
   const [prenotazione, setPrenotazione] = useState({
     data: "",
   });
+  const [editData, setEditData] = useState("");
+  const [editTime, setEditTime] = useState("");
+  const [editStato, setEditStato] = useState("");
+
+  useEffect(() => {
+    setEditData(props.prenotazione.data);
+    setEditTime(props.prenotazione.orario);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props]);
 
   useEffect(() => {
     setPrenotazione({
@@ -16,6 +30,12 @@ const EditPrenotazione = (props) => {
 
   const editPrenotazione = async (e) => {
     e.preventDefault();
+    const prenotazioneModificata = {
+      data: editData,
+      orario: editTime,
+      stato: editStato,
+    };
+
     try {
       const response = await fetch(
         `http://localhost:3001/prenotazioni/${props.prenotazione.id}`,
@@ -25,7 +45,7 @@ const EditPrenotazione = (props) => {
             "Content-Type": "application/json",
             Authorization: "Bearer " + props.token,
           },
-          body: JSON.stringify(prenotazione),
+          body: JSON.stringify(prenotazioneModificata),
         }
       );
       if (response.ok) {
@@ -51,35 +71,57 @@ const EditPrenotazione = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Edit Prenotazione
+          Modifica Prenotazione
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group className="my-3" controlId="data">
-            <Form.Label>Data prenotazione</Form.Label>
+            <Form.Label>Hai una prenotazione per il:</Form.Label>
             <Form.Control
               type="text"
               required
-              value={prenotazione.data}
-              onChange={(e) =>
-                setPrenotazione({ ...prenotazione, data: e.target.value })
-              }
-              style={{ background: "#010409", color: "#fff" }}
+              value={editData}
+              onChange={(e) => setEditData(e.target.value)}
             />
           </Form.Group>
-          <Button
-            variant="primary"
-            className="w-100 mb-3"
-            type="button"
-            onClick={editPrenotazione}
+          <div className="datePicker">
+            Quando volete giocare?
+            <DatePicker
+              selected={props.prenotazione.data}
+              onChange={(date) => setEditData(date)} // Aggiorna lo stato di editData
+              format="dd-mm-yyyy"
+            />
+          </div>
+          <div className="timePicker">
+            A che ora?
+            <TimePicker
+              value={editTime}
+              onChange={(time) => setEditTime(time)} // Aggiorna lo stato di editTime
+              format="HH:mm"
+            />
+          </div>
+          <Form.Select
+            name="formStato"
+            aria-label="Default select example"
+            className="my-4 ms-2"
+            value={editStato}
+            onChange={(e) => setEditStato(e.target.value)}
           >
-            Edit Prenotazione
-          </Button>
+            <option value="">Conferma prenotazione</option>
+            <option value="CONFERMATA">CONFERMATA</option>
+          </Form.Select>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button
+          variant="primary"
+          className="w-100 mb-3"
+          type="button"
+          onClick={editPrenotazione}
+        >
+          Edit Prenotazione
+        </Button>
       </Modal.Footer>
     </Modal>
   );
