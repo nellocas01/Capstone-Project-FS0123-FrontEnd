@@ -1,10 +1,17 @@
 import Container from "react-bootstrap/Container";
-import { Col, Image, Row } from "react-bootstrap";
+import { Carousel, Col, Image, Row } from "react-bootstrap";
 import phoneLogo from "../assets/img/phoneLogo.jpg";
 import appStore from "../assets/img/appStore.png";
 import googleStore from "../assets/img/googleStore.png";
 import phoneFormazione from "../assets/img/phoneFormazione.jpg";
 import phoneControllo from "../assets/img/phoneControllo.png";
+import campiDue from "../assets/img/campiDue.jpg";
+import campiImg from "../assets/img/campiImg.jpg";
+import docceSpogliatoio from "../assets/img/docceSpogliatoio.jpeg";
+import grandangoloCampo from "../assets/img/grandangoloCampo.jpg";
+import spogliatoiEsterno1 from "../assets/img/spogliatoiEsterno1.jpeg";
+import spogliatoiInterno from "../assets/img/spogliatoiInterno.jpg";
+import parcheggioCampo from "../assets/img/parcheggioCampo.jpg";
 import NavbarComponent from "./NavbarComponent";
 import FooterComponent from "./FooterComponent";
 import { Link } from "react-router-dom";
@@ -26,7 +33,6 @@ const HomePage = () => {
                 <br />
                 le tue partite di calcio
               </h3>
-              <div></div>
               <p>
                 StonksBall è un’app che permette di organizzare al meglio le
                 partite di calcio con gli amici e non solo. <br />
@@ -60,6 +66,107 @@ const HomePage = () => {
           </Col>
         </Row>
       </Container>
+
+      {/* GALLERY  */}
+      <Container className="my-5">
+        <h2>GALLERY</h2>
+        <h4>qualche scatto delle nostre strutture</h4>
+        <Carousel>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              alt="First slide"
+              src={campiDue}
+              height={550}
+            />
+            <Carousel.Caption>
+              <h3>I CAMPI</h3>
+              <p>Nuovi campetti di calcio a 5</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              alt="First slide"
+              src={campiImg}
+              height={550}
+            />
+            <Carousel.Caption>
+              <h3>I CAMPI</h3>
+              <p>Nuovi campetti di calcio a 5</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              alt="First slide"
+              src={grandangoloCampo}
+              height={550}
+            />
+            <Carousel.Caption>
+              <h3>I CAMPI</h3>
+              <p>Nuovi campetti di calcio a 5</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              alt="First slide"
+              src={spogliatoiEsterno1}
+              height={550}
+            />
+            <Carousel.Caption>
+              <h3>SPOGLIATOI</h3>
+              <p>
+                Nuovi Spogliatoi muniti di docce, prese elettriche e
+                asciugacapelli
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              alt="First slide"
+              src={spogliatoiInterno}
+              height={550}
+            />
+            <Carousel.Caption>
+              <h3>SPOGLIATOI</h3>
+              <p>
+                Nuovi Spogliatoi muniti di docce, prese elettriche e
+                asciugacapelli
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              alt="First slide"
+              src={docceSpogliatoio}
+              height={550}
+            />
+            <Carousel.Caption>
+              <h3>SPOGLIATOI</h3>
+              <p>
+                Nuovi Spogliatoi muniti di docce, prese elettriche e
+                asciugacapelli
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              alt="First slide"
+              src={parcheggioCampo}
+              height={550}
+            />
+            <Carousel.Caption>
+              <h3>PARCHEGGIO</h3>
+              <p>Tutti i campi sono muniti di parcheggio gratuito!</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+      </Container>
       <Container>
         <h4 className="my-5">
           Risparmia tempo e organizza le tue partite in modo semplice e rapido.
@@ -72,8 +179,9 @@ const HomePage = () => {
             <h5>Amministra o iscriviti a Gruppi Partita.</h5>
             <p>
               StonksBall permette a tutti gli utenti di creare prenotazioni e
-              gestirle come Amministratore in tutte le fasi. Ogni utente può sia
-              giocare che amministrare. Puoi trovare questa sezione in{" "}
+              confermare il campo scelto tra quelli disponibili. Ogni utente può
+              sia giocare che amministrare, ma per eventuali cambiamenti basta
+              contattare la struttura. Puoi trovare questa sezione in{" "}
               <Link to="/prenotazioni" className="text-dark">
                 Prenota un campo <HandIndex />
               </Link>

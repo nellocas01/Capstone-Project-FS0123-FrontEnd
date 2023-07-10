@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 
 const Prenotazioni = () => {
   const [token, setToken] = useState();
+  const [utente, setUtente] = useState({});
   const [confermate, setPrenotazioniConfermate] = useState([]);
   const [inAttesa, setPrenotazioniInAttesa] = useState([]);
   const [prenotazioni, setPrenotazioni] = useState({
@@ -46,6 +47,7 @@ const Prenotazioni = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken"));
+    setUtente(localStorage.getItem("utenteLoggato"));
     fetchListaPrenotazioni(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
@@ -234,10 +236,14 @@ const Prenotazioni = () => {
                       key={index}
                       className="prenotazioni-list-item"
                     >
-                      <h4 className="me-auto">
+                      <h4>
                         Prenotazione {prenotazione.stato}
-                        <CheckCircleFill className="ms-auto" color="green" />
+                        <CheckCircleFill
+                          color="green"
+                          className="d-flex mt-2"
+                        />
                       </h4>
+
                       <h5>per utente x</h5>
                       {/* confermata = stato.confermata o stato.in attesa - utente = user */}
                       <h6>il giorno: {prenotazione.data}</h6>
@@ -259,23 +265,27 @@ const Prenotazioni = () => {
                       <h5>per utente x</h5>
                       <h6>il giorno: {prenotazione.data}</h6>
                       <div className="btn-attesa">
-                        <Button
-                          variant="warning"
-                          className="text-light mx-5 d-flex justify-content-end"
-                          onClick={() => {
-                            setShowModal(true);
-                            setSelectedPrenotazione(prenotazione);
-                          }}
-                        >
-                          <PencilSquare />
-                        </Button>
+                        {utente.ruolo === "ADMIN" && (
+                          <>
+                            <Button
+                              variant="warning"
+                              className="text-light mx-5 d-flex justify-content-end"
+                              onClick={() => {
+                                setShowModal(true);
+                                setSelectedPrenotazione(prenotazione);
+                              }}
+                            >
+                              <PencilSquare />
+                            </Button>
 
-                        <Button
-                          variant="danger"
-                          onClick={() => deletePrenotazioni(prenotazione)}
-                        >
-                          X
-                        </Button>
+                            <Button
+                              variant="danger"
+                              onClick={() => deletePrenotazioni(prenotazione)}
+                            >
+                              X
+                            </Button>
+                          </>
+                        )}
                       </div>
                     </ListGroupItem>
                   ))}

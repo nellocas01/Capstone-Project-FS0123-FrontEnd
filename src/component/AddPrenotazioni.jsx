@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Form, Modal } from "react-bootstrap";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, CardElement } from "@stripe/react-stripe-js";
+import { Button, Container, Form, ListGroupItem, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import NavbarComponent from "./NavbarComponent";
 import DatePicker from "react-datepicker";
@@ -12,6 +14,18 @@ const AddPrenotazioneForm = () => {
   const navigator = useNavigate();
 
   const [token, setToken] = useState();
+  // const stripePromise = loadStripe(
+  //   "pk_test_51NSJL9Hby2Kbf4K2E4glaqUvBcss5X12VWnD9U2ssLbRjOW5ty1Z8OTPW18d2JCoVjFrI6rESfMItCZnsuVbiiUm00cXrDfgCd"
+  // );
+  // const [stripe, setStripe] = useState(null);
+  // useEffect(() => {
+  //   const initializeStripe = async () => {
+  //     const stripe = await stripePromise;
+  //     setStripe(stripe);
+  //   };
+
+  //   initializeStripe();
+  // }, []);
 
   const [prenotazione, setPrenotazione] = useState({
     data: "",
@@ -33,6 +47,48 @@ const AddPrenotazioneForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   const { error, paymentIntent } = await stripe.confirmPayment(clientSecret, {
+  //     payment_method: {
+  //       card: elements.getElement(CardElement),
+  //       billing_details: {
+  //         /* dettagli di fatturazione */
+  //       },
+  //     },
+  //     /* altre opzioni di conferma */
+  //   });
+
+  //   if (error) {
+  //     // Gestisci l'errore di pagamento
+  //   } else {
+  //     // Pagamento confermato con successo
+  //   }
+
+  //   setLoading(false);
+  // }
+
+  // if (stripe) {
+  //   const { error } = await stripe.confirmPayment({
+  //     elements: stripe.elements(),
+  //     confirmParams: {
+  //       // Imposta l'URL di ritorno dopo il pagamento
+  //       return_url: "URL_DI_RITORNO_DOPO_PAGAMENTO",
+  //       receipt_email: "EMAIL_DEL_CLIENTE",
+  //     },
+  //   });
+  //   if (error) {
+  //     // Gestisci gli errori di pagamento
+  //     console.log(error);
+  //   } else {
+  //     // Il pagamento è stato confermato con successo
+  //     console.log("Pagamento confermato!");
+  //     // Puoi eseguire ulteriori azioni dopo la conferma del pagamento, ad esempio salvare la prenotazione nel backend
+  //   }
+  // }
+
   const addPrenotazione = async (e) => {
     e.preventDefault();
     const formStato = document.querySelector('[name="formStato"]');
@@ -52,6 +108,7 @@ const AddPrenotazioneForm = () => {
       data: dataPrenotazione,
       stato: statoValue,
     };
+
     //setError("");
     try {
       const response = await fetch(`http://localhost:3001/prenotazioni`, {
@@ -98,6 +155,17 @@ const AddPrenotazioneForm = () => {
               <Modal.Title>Per prenotare:</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+              {/* {stripe && (
+                <Elements stripe={stripe}> */}
+              <ul>
+                Il costo del fitto è di 70€, cosa include:
+                <li>Campetto per 10 giocatori</li>
+                <li>
+                  Spogliatoi muniti di docce, prese elettriche e asciugacapelli
+                </li>
+                <li>Bottiglina d'acqua</li>
+                <li>Parcheggio gratuito</li>
+              </ul>
               <div className="datePicker">
                 Quando volete giocare?
                 <DatePicker
@@ -130,6 +198,8 @@ const AddPrenotazioneForm = () => {
               >
                 Aggiungi Prenotazione
               </Button>
+              {/* </Elements>
+              )} */}
             </Modal.Body>
           </Container>
         </Modal>

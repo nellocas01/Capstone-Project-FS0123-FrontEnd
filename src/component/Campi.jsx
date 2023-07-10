@@ -4,6 +4,7 @@ import {
   AccordionContext,
   Alert,
   Card,
+  Container,
   Image,
   ListGroup,
   ListGroupItem,
@@ -11,7 +12,7 @@ import {
   useAccordionButton,
 } from "react-bootstrap";
 import NavbarComponent from "./NavbarComponent";
-import campiImg from "../assets/img/campiImg.jpg";
+import campoSingolo from "../assets/img/campoSingolo.jpeg";
 import { InfoCircle, Link } from "react-bootstrap-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -109,51 +110,54 @@ const Campi = () => {
               Nessun risultato trovato.
             </Alert>
           )}
-          <ListGroup className="campi-list-group">
-            {campi.map((campo, index) => (
-              <ListGroupItem key={index} className="campi-list-item">
-                {campo.nome} - {campo.indirizzo}
-                <Image
-                  src={campiImg}
-                  width={200}
-                  alt="campiImg"
-                  className="mx-5"
-                />
-                <Accordion defaultActiveKey="0">
-                  <Card>
-                    <Card.Header>
-                      <ContextAwareToggle eventKey="info">
-                        <InfoCircle />
-                      </ContextAwareToggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="info">
-                      <Card.Body>
-                        Il {campo.nome}, situato in {campo.indirizzo}, è un
-                        campetto di calcio a 5, dove per giocare è necessario
-                        formare 2 squadre da 5 per un totale di 10 persone. La
-                        struttura è aperta dalle ore 16 alle 24, la durata della
-                        partita è di 1 ora. Sono disponibili in struttura anche
-                        spogliatoi muniti di docce e asciugacapelli.
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
-                  <Card>
-                    <Card.Header>
-                      <ContextAwareToggle eventKey="prenotazione">
-                        Prenotazione
-                      </ContextAwareToggle>
-                    </Card.Header>
-                    <Accordion.Collapse eventKey="prenotazione">
-                      <Card.Body>
-                        Non lasciarti perdere questo campo e
-                        <a href="/add-prenotazioni"> Prenotalo qui!</a>
-                      </Card.Body>
-                    </Accordion.Collapse>
-                  </Card>
-                </Accordion>
-              </ListGroupItem>
-            ))}
-          </ListGroup>
+          <Container>
+            <ListGroup className="campi-list-group">
+              {campi.map((campo, index) => (
+                <ListGroupItem key={index} className="campi-list-item">
+                  {campo.nome} - {campo.indirizzo}
+                  <Image
+                    src={campoSingolo}
+                    width={200}
+                    alt="campiImg"
+                    className="mx-5"
+                  />
+                  <Accordion defaultActiveKey="0">
+                    <Card>
+                      <Card.Header>
+                        <ContextAwareToggle eventKey="info">
+                          <InfoCircle />
+                        </ContextAwareToggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="info">
+                        <Card.Body>
+                          Il {campo.nome}, situato in {campo.indirizzo}, è un
+                          campetto di calcio a 5, dove per giocare è necessario
+                          formare 2 squadre da 5 per un totale di 10 persone. La
+                          struttura è aperta dalle ore 16 alle 24, la durata
+                          della partita è di 1 ora. Sono disponibili in
+                          struttura anche spogliatoi muniti di docce e
+                          asciugacapelli.
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </Card>
+                    <Card>
+                      <Card.Header>
+                        <ContextAwareToggle eventKey="prenotazione">
+                          Prenotazione
+                        </ContextAwareToggle>
+                      </Card.Header>
+                      <Accordion.Collapse eventKey="prenotazione">
+                        <Card.Body>
+                          Non lasciarti perdere questo campo e
+                          <a href="/add-prenotazioni"> Prenotalo qui!</a>
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </Card>
+                  </Accordion>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Container>
         </>
       )}
     </>
