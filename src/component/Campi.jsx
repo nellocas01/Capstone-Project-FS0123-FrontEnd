@@ -111,16 +111,19 @@ const Campi = () => {
             </Alert>
           )}
           <Container>
-            <ListGroup className="campi-list-group">
-              {campi.map((campo, index) => (
-                <ListGroupItem key={index} className="campi-list-item">
-                  {campo.nome} - {campo.indirizzo}
-                  <Image
-                    src={campoSingolo}
-                    width={200}
-                    alt="campiImg"
-                    className="mx-5"
-                  />
+            {campi.map((campo, index) => (
+              <Card className="campi-list-group" style={{ width: "30rem" }}>
+                <Card.Img
+                  src={campoSingolo}
+                  width={50}
+                  alt="campiImg"
+                  className="mx-5"
+                />
+                <Card.Body>
+                  <Card.Title key={index} className="campi-list-item">
+                    {campo.nome}
+                  </Card.Title>
+                  <Card.Text>{campo.indirizzo}</Card.Text>
                   <Accordion defaultActiveKey="0">
                     <Card>
                       <Card.Header>
@@ -154,9 +157,9 @@ const Campi = () => {
                       </Accordion.Collapse>
                     </Card>
                   </Accordion>
-                </ListGroupItem>
-              ))}
-            </ListGroup>
+                </Card.Body>
+              </Card>
+            ))}
           </Container>
         </>
       )}

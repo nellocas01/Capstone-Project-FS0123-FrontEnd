@@ -6,6 +6,7 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 const ProfilePage = () => {
   const [token, setToken] = useState();
   const [utente, setUtente] = useState({
+    id: "",
     nome: "",
     cognome: "",
     username: "",
@@ -21,7 +22,7 @@ const ProfilePage = () => {
   const handleUtente = async (event) => {
     event.preventDefaul();
     try {
-      const response = await fetch(`http://localhost:3001/users/:userId`, {
+      const response = await fetch(`http://localhost:3001/users/${utente.id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +30,7 @@ const ProfilePage = () => {
         },
         body: JSON.stringify(utente),
       });
+      console.log(response);
       if (response.ok) {
         const risposta = await response.json();
         console.log(risposta);

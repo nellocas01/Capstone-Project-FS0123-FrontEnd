@@ -82,7 +82,7 @@ body {
   align-items: center;
   background-color: #aaf5ac;
 }
-.campi-list-item{
+/* .campi-list-item{
   border: none;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -91,7 +91,7 @@ body {
   align-items: center;
   background-color: #aaf5ac;
   /* background-color: #84fa88; */
-}
+
 @media screen and (max-width: 768px) {
   .campi-list-item {
     flex-direction: column;
