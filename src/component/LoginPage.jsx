@@ -6,12 +6,17 @@ import { Link } from "react-router-dom";
 
 const LOGIN_URL = "/auth/login";
 
-const saveTokenToLocalStorage = (token) => {
+const saveTokenToLocalStorage = (token, userId) => {
   localStorage.setItem("accessToken", token);
+  localStorage.setItem("userId", userId);
 };
 
+// const saveUser = (utente) => {
+//   localStorage.setItem("utenteLoggato", utente);
+// };
+
 const LoginPage = (props) => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth, setUser } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
 
@@ -40,12 +45,18 @@ const LoginPage = (props) => {
           headers: { "Content-Type": "application/json" },
         }
       );
+      console.log(response);
+      // const utenteLoggato = response.config.data;
+      // saveUser(utenteLoggato);
       console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
-      saveTokenToLocalStorage(accessToken);
+      // const userId = response?.data?.userId;
+      // saveTokenToLocalStorage(accessToken, userId);
       console.log("token salvato nel localstorage", accessToken);
+      // console.log("utente salvato nel localstorage", utenteLoggato);
       const roles = response?.data?.roles;
       setAuth({ username, password, roles, accessToken });
+      //setUser(userId);
       setUsername(username);
       setPassword("");
       setSucces(true);

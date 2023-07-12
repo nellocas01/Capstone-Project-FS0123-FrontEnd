@@ -5,19 +5,12 @@ import {
   Alert,
   Card,
   Container,
-  Image,
-  ListGroup,
-  ListGroupItem,
   Spinner,
   useAccordionButton,
 } from "react-bootstrap";
 import NavbarComponent from "./NavbarComponent";
 import campoSingolo from "../assets/img/campoSingolo.jpeg";
-import { InfoCircle, Link } from "react-bootstrap-icons";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import TimePicker from "react-time-picker";
-import "react-time-picker/dist/TimePicker.css";
+import { InfoCircle } from "react-bootstrap-icons";
 
 const Campi = () => {
   const [token, setToken] = useState();
@@ -27,8 +20,6 @@ const Campi = () => {
   //modale prenotazioone
   const [fullscreen, setFullscreen] = useState(false);
   const [show, setShow] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState("16:00");
   //funzione modale prenotazione
   function handleShow(breakpoint) {
     setFullscreen(breakpoint);

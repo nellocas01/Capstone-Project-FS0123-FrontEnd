@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 
 const REGISTER_URL = "/auth/register";
 
+const saveUserId = (userId) => {
+  localStorage.setItem("utenteLoggato", userId);
+};
+
 const RegisterPage = (props) => {
   const { setAuth } = useContext(AuthContext);
   const userRef = useRef(null);
@@ -35,13 +39,26 @@ const RegisterPage = (props) => {
     try {
       const response = await axios.post(
         REGISTER_URL,
+
         JSON.stringify({ name, surname, username, email, password }),
         {
           headers: { "Content-Type": "application/json" },
         }
       );
+      console.log(response.data.id);
+      const utenteLoggato = response.data.id;
+      saveUserId(utenteLoggato);
+      console.log("id utente salvato nel localstorage", utenteLoggato);
       const roles = response?.data?.roles;
-      setAuth({ name, surname, username, email, password, roles });
+      setAuth({
+        name,
+        surname,
+        username,
+        email,
+        password,
+        roles,
+        utenteLoggato,
+      });
       setName(name);
       setSurname("");
       setUsername("");
