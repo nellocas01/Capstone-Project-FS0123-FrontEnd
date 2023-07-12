@@ -112,17 +112,10 @@ const Campi = () => {
           )}
           <Container>
             {campi.map((campo, index) => (
-              <Card className="campi-list-group" style={{ width: "30rem" }}>
-                <Card.Img
-                  src={campoSingolo}
-                  width={50}
-                  alt="campiImg"
-                  className="mx-5"
-                />
+              <Card className="campi-card-group" style={{ width: "30rem" }}>
+                <Card.Img src={campoSingolo} alt="campiImg" className="mx-5" />
                 <Card.Body>
-                  <Card.Title key={index} className="campi-list-item">
-                    {campo.nome}
-                  </Card.Title>
+                  <Card.Title key={index}>{campo.nome}</Card.Title>
                   <Card.Text>{campo.indirizzo}</Card.Text>
                   <Accordion defaultActiveKey="0">
                     <Card>

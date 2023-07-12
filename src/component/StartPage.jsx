@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const StartPage = () => {
   return (
-    <Container fluid>
+    <Container fluid className="start-cnt">
       <Row className="mt-5 mx-5">
         <Col md={5} className="text-start">
           <h1 className="m-5">StonksBall la partita perfetta per te!</h1>

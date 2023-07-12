@@ -44,6 +44,13 @@ body {
 }
 
 /* START PAGE */
+@media screen and (max-width: 320px) {
+  .start-cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
   .img-start {
     width: 100vh;
     height: 60vh;
@@ -76,24 +83,14 @@ body {
   flex-direction: column;
   justify-content: center;
 }
-.campi-list-group{
-  display: flex;
-  justify-content: center;
+.campi-card-group{
   align-items: center;
   background-color: #aaf5ac;
+  margin: 0 auto;
+  margin-bottom: 5rem;
 }
-/* .campi-list-item{
-  border: none;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding: 3rem;
-  display: flex;
-  align-items: center;
-  background-color: #aaf5ac;
-  /* background-color: #84fa88; */
-
-@media screen and (max-width: 768px) {
-  .campi-list-item {
+@media screen and (max-width: 320px) {
+  .campi-card-item {
     flex-direction: column;
     align-items: flex-start;
   }
