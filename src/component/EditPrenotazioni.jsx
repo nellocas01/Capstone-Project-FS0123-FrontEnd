@@ -7,6 +7,7 @@ import "react-time-picker/dist/TimePicker.css";
 import { format, parse } from "date-fns";
 
 const EditPrenotazione = (props) => {
+  const [token, setToken] = useState();
   const [prenotazione, setPrenotazione] = useState({
     data: "",
   });
@@ -15,24 +16,17 @@ const EditPrenotazione = (props) => {
   const [editStato, setEditStato] = useState("");
 
   useEffect(() => {
-    setEditData(props.prenotazione.data);
-    setEditTime(props.prenotazione.orario);
+    setToken(localStorage.getItem("accessToken"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props]);
-
-  useEffect(() => {
-    setPrenotazione({
-      data: props.prenotazione.data,
-    });
-    console.log(props.prenotazione);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props]);
+  }, [token]);
 
   const editPrenotazione = async (e) => {
     e.preventDefault();
+    // Format the editData and editTime values
+    const formattedDateTime = `${format(editData, "dd-MM-yyyy")} ${editTime}`;
+
     const prenotazioneModificata = {
-      data: editData,
-      orario: editTime,
+      data: formattedDateTime,
       stato: editStato,
     };
 
@@ -43,7 +37,7 @@ const EditPrenotazione = (props) => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + props.token,
+            Authorization: "Bearer " + token,
           },
           body: JSON.stringify(prenotazioneModificata),
         }
@@ -52,7 +46,6 @@ const EditPrenotazione = (props) => {
         const risposta = await response.json();
         console.log(risposta);
         props.onHide();
-        props.reset();
       } else {
         const errorData = await response.json();
         console.log(errorData);
@@ -79,16 +72,17 @@ const EditPrenotazione = (props) => {
           <Form.Group className="my-3" controlId="data">
             <Form.Label>Hai una prenotazione per il:</Form.Label>
             <Form.Control
+              readOnly
               type="text"
               required
-              value={editData}
+              value={props.prenotazione.data}
               onChange={(e) => setEditData(e.target.value)}
             />
           </Form.Group>
           <div className="datePicker">
             Quando volete giocare?
             <DatePicker
-              selected={props.prenotazione.data}
+              selected={editData}
               onChange={(date) => setEditData(date)} // Aggiorna lo stato di editData
               format="dd-mm-yyyy"
             />

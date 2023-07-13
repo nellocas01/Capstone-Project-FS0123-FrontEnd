@@ -10,7 +10,6 @@ import {
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState();
-
   const [token, setToken] = useState();
   const [userId, setUserId] = useState();
 

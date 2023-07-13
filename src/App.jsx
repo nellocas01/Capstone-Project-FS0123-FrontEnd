@@ -11,6 +11,7 @@ import AddCampiForm from "./component/AddCampi";
 import Prenotazioni from "./component/Prenotazioni";
 import AddPrenotazioneForm from "./component/AddPrenotazioni";
 import ProfilePage from "./component/ProfilePage";
+import EditPrenotazione from "./component/EditPrenotazioni";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/profilo" element={<ProfilePage />} />
           <Route path="/campi" element={<Campi />} />
           <Route path="/prenotazioni" element={<Prenotazioni />} />
+          <Route path="/edit-prenotazioni" element={<EditPrenotazione />} />
           <Route path="/add-campo" element={<AddCampiForm />} />
           <Route path="/add-prenotazioni" element={<AddPrenotazioneForm />} />
         </Routes>

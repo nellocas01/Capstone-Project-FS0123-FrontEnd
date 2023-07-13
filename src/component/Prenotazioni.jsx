@@ -16,11 +16,9 @@ import { CheckCircleFill, PencilSquare } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 const Prenotazioni = () => {
-  const [token, setToken] = useState();
-  const [utente, setUtente] = useState({});
   const [confermate, setPrenotazioniConfermate] = useState([]);
   const [inAttesa, setPrenotazioniInAttesa] = useState([]);
-  const [prenotazioni, setPrenotazioni] = useState({
+  const [prenotazione, setPrenotazione] = useState({
     data: "",
   });
   const [loading, setLoading] = useState(true);
@@ -35,7 +33,11 @@ const Prenotazioni = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [AddModal, setAddModal] = useState(false);
+  const [setAddModal] = useState(false);
+
+  const [userDetails, setUserDetails] = useState();
+  const [token, setToken] = useState();
+  const [userId, setUserId] = useState();
 
   const openModal = () => {
     setAddModal(true);
@@ -47,7 +49,45 @@ const Prenotazioni = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("accessToken"));
-    setUtente(localStorage.getItem("utenteLoggato"));
+    setUserId(localStorage.getItem("utenteLoggato"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      fetchUser();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
+  const fetchUser = async () => {
+    if (token) {
+      try {
+        const response = await fetch(`http://localhost:3001/users/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+        if (response.ok) {
+          //console.log(response);
+          const user = await response.json();
+          //console.log(user);
+          setUserDetails(user);
+        } else {
+          const errorData = await response.json();
+          console.log(errorData);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    setToken(localStorage.getItem("accessToken"));
+    setUserId(localStorage.getItem("utenteLoggato"));
     fetchListaPrenotazioni(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
@@ -70,7 +110,7 @@ const Prenotazioni = () => {
       if (response.ok) {
         const risposta = await response.json();
         console.log(risposta);
-        setPrenotazioni({ ...prenotazioni, stato: risposta.stato });
+        setPrenotazione({ ...prenotazioni, stato: risposta.stato });
       } else {
         const errorData = await response.json();
         console.log(errorData);
@@ -79,10 +119,6 @@ const Prenotazioni = () => {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    console.log(prenotazioni);
-  }, [prenotazioni]);
 
   useEffect(() => {
     if (url !== "") {
@@ -131,7 +167,7 @@ const Prenotazioni = () => {
         if (response.ok) {
           const userData = await response.json();
           //console.log(userData);
-          setPrenotazioni(userData.content);
+          setPrenotazione(userData.content);
         } else {
           const errorData = await response.json();
           console.log(errorData);
@@ -244,8 +280,7 @@ const Prenotazioni = () => {
                         />
                       </h4>
 
-                      <h5>per utente x</h5>
-                      {/* confermata = stato.confermata o stato.in attesa - utente = user */}
+                      <h5>per utente {userDetails?.username} </h5>
                       <h6>il giorno: {prenotazione.data}</h6>
                     </ListGroupItem>
                   ))}
@@ -262,10 +297,10 @@ const Prenotazioni = () => {
                       <h4 className="me-auto">
                         Prenotazione {prenotazione.stato}
                       </h4>
-                      <h5>per utente x</h5>
+                      <h5>per utente {userDetails?.surname}</h5>
                       <h6>il giorno: {prenotazione.data}</h6>
                       <div className="btn-attesa">
-                        {utente.ruolo === "ADMIN" && (
+                        {userDetails?.authorities[0].authority === "ADMIN" && (
                           <>
                             <Button
                               variant="warning"
@@ -330,7 +365,6 @@ const Prenotazioni = () => {
       {showModal && (
         <EditPrenotazioni
           show={showModal}
-          reset={() => reset()}
           onHide={() => setShowModal(false)}
           prenotazione={selectedPrenotazione}
           token={token}
