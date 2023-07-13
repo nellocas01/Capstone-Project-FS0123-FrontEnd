@@ -62,10 +62,13 @@ body {
   .text-start{
     color: rgba(26, 77, 3, 0.712);
   }
-  /* .video-start{
-    src: url(../img/video.mp4);
-  } */
 /* PROFILE PAGE */
+.psw-text{
+  border: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .gradient-custom {
   /* fallback for old browsers */
   background: #f6d365;
