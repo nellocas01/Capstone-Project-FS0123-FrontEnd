@@ -6,17 +6,13 @@ import { Link } from "react-router-dom";
 
 const LOGIN_URL = "/auth/login";
 
-const saveTokenToLocalStorage = (token, userId) => {
+const saveToLocalStorage = (token, userId) => {
   localStorage.setItem("accessToken", token);
-  localStorage.setItem("userId", userId);
+  localStorage.setItem("utenteLoggato", userId);
 };
 
-// const saveUser = (utente) => {
-//   localStorage.setItem("utenteLoggato", utente);
-// };
-
 const LoginPage = (props) => {
-  const { setAuth, setUser } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
 
@@ -45,18 +41,15 @@ const LoginPage = (props) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(response);
-      // const utenteLoggato = response.config.data;
-      // saveUser(utenteLoggato);
-      console.log(JSON.stringify(response?.data));
+      //console.log(response);
+      const utenteLoggato = response.data.id;
+      //console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
-      // const userId = response?.data?.userId;
-      // saveTokenToLocalStorage(accessToken, userId);
+      saveToLocalStorage(accessToken, utenteLoggato);
       console.log("token salvato nel localstorage", accessToken);
-      // console.log("utente salvato nel localstorage", utenteLoggato);
+      console.log("utente salvato nel localstorage", utenteLoggato);
       const roles = response?.data?.roles;
-      setAuth({ username, password, roles, accessToken });
-      //setUser(userId);
+      setAuth({ username, password, roles, accessToken, utenteLoggato });
       setUsername(username);
       setPassword("");
       setSucces(true);
@@ -70,7 +63,6 @@ const LoginPage = (props) => {
       } else {
         setErrorMessage("login fallito");
       }
-      errRef.current.focus();
     }
   };
 

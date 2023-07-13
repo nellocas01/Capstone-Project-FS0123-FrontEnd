@@ -3,6 +3,10 @@ import Container from "react-bootstrap/Container";
 import { Xbox } from "react-bootstrap-icons";
 
 const NavbarComponent = () => {
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("utenteLoggato");
+  };
   return (
     <>
       {/* NAVBAR */}
@@ -20,7 +24,7 @@ const NavbarComponent = () => {
           <Navbar.Brand href="/profilo" className="mx-5">
             Gestisci il tuo profilo
           </Navbar.Brand>
-          <Navbar.Brand href="/" className="mx-5">
+          <Navbar.Brand href="/" className="mx-5" onClickCapture={logout}>
             Esci
           </Navbar.Brand>
         </Container>
