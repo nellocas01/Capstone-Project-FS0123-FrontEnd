@@ -101,7 +101,7 @@ const Campi = () => {
               Nessun risultato trovato.
             </Alert>
           )}
-          <Container>
+          <Container className="campi-card">
             {campi.map((campo, index) => (
               <Card className="campi-card-group" style={{ width: "30rem" }}>
                 <Card.Img src={campoSingolo} alt="campiImg" className="mx-5" />

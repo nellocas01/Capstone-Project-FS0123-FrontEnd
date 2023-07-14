@@ -93,7 +93,7 @@ body {
   margin-bottom: 5rem;
 }
 @media screen and (max-width: 320px) {
-  .campi-card-item {
+  .campi-card {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -119,4 +119,30 @@ body {
 .btn-attesa{
   display: flex;
   margin-top: 1.5rem;
+}
+/* NAVBAR */
+@media screen and (max-width: 768){
+.nav-component{
+flex-direction: column;
+    
+  }
+}
+/* PAYMENT */
+#payment-form {
+  border: #F6F9FC solid 1px;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 30px 50px -20px rgb(50 50 93 / 25%), 0 30px 60px -30px rgb(0 0 0 / 30%);
+}
+
+#messages {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  display: none; /* hide initially, then show once the first message arrives */
+  background-color: #0A253C;
+  color: #00D924;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: var(--radius);
+  font-size:0.7em;
 }
