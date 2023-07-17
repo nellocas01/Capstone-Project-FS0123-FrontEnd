@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement } from "@stripe/react-stripe-js";
 import { Button, Container, Form, ListGroupItem, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import NavbarComponent from "./NavbarComponent";
+import NavbarComponent from "../NavbarComponent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";

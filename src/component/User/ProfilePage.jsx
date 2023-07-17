@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
-import NavbarComponent from "./NavbarComponent";
+import NavbarComponent from "../NavbarComponent";
 import {
   Facebook,
   Instagram,

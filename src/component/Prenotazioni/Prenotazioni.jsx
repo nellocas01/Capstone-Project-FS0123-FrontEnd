@@ -10,8 +10,8 @@ import {
   Spinner,
 } from "react-bootstrap";
 import EditPrenotazioni from "./EditPrenotazioni";
-import NavbarComponent from "./NavbarComponent";
-import FooterComponent from "./FooterComponent";
+import NavbarComponent from "../NavbarComponent";
+import FooterComponent from "../FooterComponent";
 import { CheckCircleFill, PencilSquare } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
@@ -279,8 +279,6 @@ const Prenotazioni = () => {
                           className="d-flex mt-2"
                         />
                       </h4>
-
-                      <h5>per utente {userDetails?.username} </h5>
                       <h6>il giorno: {prenotazione.data}</h6>
                     </ListGroupItem>
                   ))}
@@ -297,7 +295,6 @@ const Prenotazioni = () => {
                       <h4 className="me-auto">
                         Prenotazione {prenotazione.stato}
                       </h4>
-                      <h5>per utente {userDetails?.surname}</h5>
                       <h6>il giorno: {prenotazione.data}</h6>
                       <div className="btn-attesa">
                         {userDetails?.authorities[0].authority === "ADMIN" && (

@@ -22,7 +22,7 @@ const NavbarComponent = () => {
             Prenota un campo
           </Navbar.Brand>
           <Navbar.Brand href="/profilo" className="mx-5">
-            Gestisci il tuo profilo
+            Il tuo profilo
           </Navbar.Brand>
           <Navbar.Brand href="/" className="mx-5" onClickCapture={logout}>
             Esci

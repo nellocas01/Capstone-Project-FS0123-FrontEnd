@@ -3,15 +3,14 @@ import "./assets/css/style.css";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import StartPage from "./component/StartPage";
-import LoginPage from "./component/LoginPage";
-import RegisterPage from "./component/RegisterPage";
+import LoginPage from "./component/User/LoginPage";
+import RegisterPage from "./component/User/RegisterPage";
 import HomePage from "./component/HomePage";
-import Campi from "./component/Campi";
-import AddCampiForm from "./component/AddCampi";
-import Prenotazioni from "./component/Prenotazioni";
-import AddPrenotazioneForm from "./component/AddPrenotazioni";
-import ProfilePage from "./component/ProfilePage";
-import EditPrenotazione from "./component/EditPrenotazioni";
+import Campi from "./component/Campi/Campi";
+import Prenotazioni from "./component/Prenotazioni/Prenotazioni";
+import EditPrenotazione from "./component/Prenotazioni/EditPrenotazioni";
+import AddPrenotazioneForm from "./component/Prenotazioni/AddPrenotazioni";
+import ProfilePage from "./component/User/ProfilePage";
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
           <Route path="/campi" element={<Campi />} />
           <Route path="/prenotazioni" element={<Prenotazioni />} />
           <Route path="/edit-prenotazioni" element={<EditPrenotazione />} />
-          <Route path="/add-campo" element={<AddCampiForm />} />
           <Route path="/add-prenotazioni" element={<AddPrenotazioneForm />} />
         </Routes>
       </BrowserRouter>

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import AuthContext from "../../context/AuthProvider";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import { Link } from "react-router-dom";
 
 const LOGIN_URL = "/auth/login";

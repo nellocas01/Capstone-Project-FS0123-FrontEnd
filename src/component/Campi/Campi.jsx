@@ -8,8 +8,8 @@ import {
   Spinner,
   useAccordionButton,
 } from "react-bootstrap";
-import NavbarComponent from "./NavbarComponent";
-import campoSingolo from "../assets/img/campoSingolo.jpeg";
+import NavbarComponent from "../NavbarComponent";
+import campoSingolo from "../../assets/img/campoSingolo.jpeg";
 import { InfoCircle } from "react-bootstrap-icons";
 
 const Campi = () => {
@@ -103,7 +103,11 @@ const Campi = () => {
           )}
           <Container className="campi-card">
             {campi.map((campo, index) => (
-              <Card className="campi-card-group" style={{ width: "30rem" }}>
+              <Card
+                key={index}
+                className="campi-card-group"
+                style={{ width: "30rem" }}
+              >
                 <Card.Img src={campoSingolo} alt="campiImg" className="mx-5" />
                 <Card.Body>
                   <Card.Title key={index}>{campo.nome}</Card.Title>
