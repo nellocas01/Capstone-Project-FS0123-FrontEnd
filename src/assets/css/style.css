@@ -91,6 +91,7 @@ body {
   background-color: #aaf5ac;
   margin: 0 auto;
   margin-bottom: 5rem;
+  max-width: 30rem;
 }
 @media screen and (max-width: 320px) {
   .campi-card {

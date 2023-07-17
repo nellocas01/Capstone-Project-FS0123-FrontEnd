@@ -103,11 +103,7 @@ const Campi = () => {
           )}
           <Container className="campi-card">
             {campi.map((campo, index) => (
-              <Card
-                key={index}
-                className="campi-card-group"
-                style={{ width: "30rem" }}
-              >
+              <Card key={index} className="campi-card-group">
                 <Card.Img src={campoSingolo} alt="campiImg" className="mx-5" />
                 <Card.Body>
                   <Card.Title key={index}>{campo.nome}</Card.Title>

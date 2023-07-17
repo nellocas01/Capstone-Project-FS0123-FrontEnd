@@ -1,5 +1,4 @@
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
+import { Navbar, Container } from "react-bootstrap";
 import { Xbox } from "react-bootstrap-icons";
 
 const NavbarComponent = () => {
@@ -7,26 +6,39 @@ const NavbarComponent = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("utenteLoggato");
   };
+
   return (
     <>
-      {/* NAVBAR */}
-      <Navbar bg="success" data-bs-theme="dark" expand="lg">
-        <Container className="d-flex justify-content-center">
+      <Navbar bg="success" data-bs-theme="dark" expand="lg" className="navbar">
+        <Container>
           <Navbar.Brand href="/home" className="text-black">
             StonksBall <Xbox />
           </Navbar.Brand>
-          <Navbar.Brand href="/campi" className="mx-5">
-            Campi disponibili
-          </Navbar.Brand>
-          <Navbar.Brand href="/prenotazioni" className="mx-5">
-            Prenota un campo
-          </Navbar.Brand>
-          <Navbar.Brand href="/profilo" className="mx-5">
-            Il tuo profilo
-          </Navbar.Brand>
-          <Navbar.Brand href="/" className="mx-5" onClickCapture={logout}>
-            Esci
-          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbar-nav" />
+          <Navbar.Collapse id="navbar-nav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a href="/campi" className="nav-link">
+                  Campi disponibili
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/prenotazioni" className="nav-link">
+                  Prenota un campo
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/profilo" className="nav-link">
+                  Il tuo profilo
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/" className="nav-link" onClickCapture={logout}>
+                  Esci
+                </a>
+              </li>
+            </ul>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
