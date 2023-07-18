@@ -39,6 +39,24 @@ const Prenotazioni = () => {
   const [token, setToken] = useState();
   const [userId, setUserId] = useState();
 
+  const updatePrenotazione = (
+    prenotazioneId,
+    prenotazioneData,
+    prenotazioneStato
+  ) => {
+    // Aggiorna lo stato delle prenotazioni con la nuova data della prenotazione modificata
+    setPrenotazioniInAttesa((prevPrenotazioni) =>
+      prevPrenotazioni.filter(
+        (prenotazione) => prenotazione.id !== prenotazioneId
+      )
+    );
+    // Aggiorna lo stato delle prenotazioni con la prenotazione confermata
+    setPrenotazioniConfermate((prevPrenotazioni) => [
+      ...prevPrenotazioni,
+      { id: prenotazioneId, data: prenotazioneData, stato: prenotazioneStato },
+    ]);
+  };
+
   const openModal = () => {
     setAddModal(true);
   };
@@ -365,6 +383,7 @@ const Prenotazioni = () => {
           onHide={() => setShowModal(false)}
           prenotazione={selectedPrenotazione}
           token={token}
+          updatePrenotazione={updatePrenotazione} // Passa la funzione come prop
         />
       )}
     </>

@@ -45,6 +45,12 @@ const EditPrenotazione = (props) => {
       if (response.ok) {
         const risposta = await response.json();
         console.log(risposta);
+        // Chiama la funzione updatePrenotazione con l'ID della prenotazione, la nuova data e lo stato confermato
+        props.updatePrenotazione(
+          props.prenotazione.id,
+          formattedDateTime,
+          "CONFERMATA"
+        );
         props.onHide();
       } else {
         const errorData = await response.json();
