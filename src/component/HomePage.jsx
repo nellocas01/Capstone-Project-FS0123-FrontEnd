@@ -198,7 +198,7 @@ const HomePage = () => {
               il tuo ruolo preferito tra: Portiere, Difensore, Centrocampista o
               Attaccante. Puoi trovare questa sezione in{" "}
               <Link to="/profilo" className="text-dark">
-                Gestisci il tuo profilo <HandIndex />
+                Il tuo profilo <HandIndex />
               </Link>
             </p>
           </Col>

@@ -1,10 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import {
-  ArrowRightCircle,
-  Facebook,
-  Instagram,
-  Twitter,
-} from "react-bootstrap-icons";
+import { ArrowRightCircle, Github, Linkedin } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 
 const FooterComponent = () => {
@@ -20,25 +15,18 @@ const FooterComponent = () => {
             </Col>
             <Col md={6}>
               <a
-                href="https://www.facebook.com/"
+                href="https://github.com/nellocas01"
                 target="blank"
                 className="mx-5"
               >
-                <Facebook />
+                <Github />
               </a>
               <a
-                href="https://www.instagram.com/"
+                href="https://www.linkedin.com/in/casolla-aniello/"
                 target="blank"
                 className="mx-5"
               >
-                <Instagram />
-              </a>
-              <a
-                href="https://twitter.com/i/flow/login?redirect_after_login=%2F%3Flang%3Dit"
-                target="blank"
-                className="mx-5"
-              >
-                <Twitter />
+                <Linkedin />
               </a>
             </Col>
           </Row>

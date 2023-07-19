@@ -361,14 +361,6 @@ const Prenotazioni = () => {
                 Pagina successiva
               </Button>
             )}
-
-            {/* <Button
-              variant="primary"
-              className="my-5"
-              onClick={() => navigator("/add-prenotazioni")}
-            >
-              Aggiungi Prenotazione
-            </Button> */}
             <Link to="/add-prenotazioni" className="my-5">
               Prenota un campo
             </Link>

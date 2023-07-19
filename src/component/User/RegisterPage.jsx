@@ -85,10 +85,10 @@ const RegisterPage = (props) => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(response.data.id);
+      //console.log(response.data.id);
       const utenteLoggato = response.data.id;
       saveUserId(utenteLoggato);
-      console.log("id utente salvato nel localstorage", utenteLoggato);
+      //console.log("id utente salvato nel localstorage", utenteLoggato);
       const roles = response?.data?.roles;
       setAuth({
         name,

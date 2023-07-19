@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import NavbarComponent from "../NavbarComponent";
-import {
-  Facebook,
-  Instagram,
-  PersonCircle,
-  Twitter,
-} from "react-bootstrap-icons";
+import { Github, Linkedin, PersonCircle } from "react-bootstrap-icons";
 
 const ProfilePage = () => {
   const [userDetails, setUserDetails] = useState();
@@ -126,15 +121,15 @@ const ProfilePage = () => {
                           </InputGroup>
                         </Col>
                       </Row>
-                      <div className="d-flex justify-content-start">
-                        <a href="#!">
-                          <Facebook size={74} />
+                      <div className="d-flex justify-content-between">
+                        <a href="https://github.com/nellocas01" target="blank">
+                          <Github size={74} />
                         </a>
-                        <a href="#!">
-                          <Twitter size={74} />
-                        </a>
-                        <a href="#!">
-                          <Instagram size={74} />
+                        <a
+                          href="https://www.linkedin.com/in/casolla-aniello/"
+                          target="blank"
+                        >
+                          <Linkedin size={74} />
                         </a>
                       </div>
                     </Card.Body>

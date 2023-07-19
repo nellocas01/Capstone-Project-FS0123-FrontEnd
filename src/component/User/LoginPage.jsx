@@ -46,8 +46,8 @@ const LoginPage = (props) => {
       //console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
       saveToLocalStorage(accessToken, utenteLoggato);
-      console.log("token salvato nel localstorage", accessToken);
-      console.log("utente salvato nel localstorage", utenteLoggato);
+      //console.log("token salvato nel localstorage", accessToken);
+      //console.log("utente salvato nel localstorage", utenteLoggato);
       const roles = response?.data?.roles;
       setAuth({ username, password, roles, accessToken, utenteLoggato });
       setUsername(username);

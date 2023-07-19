@@ -121,7 +121,7 @@ const AddPrenotazioneForm = () => {
       });
       if (response.ok) {
         const risposta = await response.json();
-        console.log(risposta);
+        //console.log(risposta);
         navigator("/prenotazioni");
       } else {
         //setError("Credenziali errate. Riprova.");
