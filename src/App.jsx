@@ -8,9 +8,9 @@ import RegisterPage from "./component/User/RegisterPage";
 import HomePage from "./component/HomePage";
 import Campi from "./component/Campi/Campi";
 import Prenotazioni from "./component/Prenotazioni/Prenotazioni";
-import EditPrenotazione from "./component/Prenotazioni/EditPrenotazioni";
-import AddPrenotazioneForm from "./component/Prenotazioni/AddPrenotazioni";
+import AddPrenotazioneForm from "./component/Prenotazioni/AddPrenotazioneForm";
 import ProfilePage from "./component/User/ProfilePage";
+import EditPrenotazioni from "./component/Prenotazioni/EditPrenotazioni";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <Route path="/profilo" element={<ProfilePage />} />
           <Route path="/campi" element={<Campi />} />
           <Route path="/prenotazioni" element={<Prenotazioni />} />
-          <Route path="/edit-prenotazioni" element={<EditPrenotazione />} />
+          <Route path="/edit-prenotazioni" element={<EditPrenotazioni />} />
           <Route path="/add-prenotazioni" element={<AddPrenotazioneForm />} />
         </Routes>
       </BrowserRouter>
