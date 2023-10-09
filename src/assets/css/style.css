@@ -1,0 +1,149 @@
+/* ---------- RESET ---------- */
+a,
+.btnLink {
+  text-decoration: none;
+  color: rgb(10, 102, 194);
+  font-weight: 600;
+}
+body {
+  /* background-color: rgba(243, 242, 239); */
+  background-color: #20cc233d;
+  color: rgba(0, 0, 0, 0.9);
+}
+.auth-form, .access{
+    text-align: center;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-image: linear-gradient(79deg, #0f9074, #0dc987cc 48%, #2ac41c98);
+}
+
+/* LOGIN & REGISTER */
+.auth-form, .login-form, .register-form{
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (min-width: 600px){   
+    .auth-form{
+        padding: 5rem;
+        border: 1px solid white;
+        border-radius: 10px;
+        margin-inline: 5rem;
+    }
+}
+.label{
+    padding: 0.25rem 0;
+}
+.link-btn{
+    background: none;
+    color: white;
+    text-decoration: underline;
+    border: none;
+}
+
+/* START PAGE */
+@media screen and (max-width: 320px) {
+  .start-cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+  .img-start {
+    width: 100vh;
+    height: 60vh;
+    background-image: url("../img/startPage.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+  }
+  .text-start{
+    color: rgba(26, 77, 3, 0.712);
+  }
+/* PROFILE PAGE */
+.psw-text{
+  border: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+/* CAMPI PAGE */
+.datePicker, .timePicker{
+  display: flex;
+  margin: 1rem;
+  flex-direction: column;
+  justify-content: center;
+}
+.campi-card-group{
+  align-items: center;
+  background-color: #aaf5ac;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+  max-width: 30rem;
+}
+@media screen and (max-width: 320px) {
+  .campi-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* PRENOTAZIONI PAGE */
+.prenotazioni-list-item{
+  border: none;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #aaf5ac;
+}
+@media screen and (max-width: 768px) {
+  .prenotazioni-list-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+.btn-attesa{
+  display: flex;
+  margin-top: 1.5rem;
+}
+/* NAVBAR */
+@media screen and (max-width: 768){
+.nav-component{
+flex-direction: column;
+    
+  }
+}
+/* PAYMENT */
+#payment-form {
+  border: #F6F9FC solid 1px;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 30px 50px -20px rgb(50 50 93 / 25%), 0 30px 60px -30px rgb(0 0 0 / 30%);
+}
+
+#messages {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  display: none; /* hide initially, then show once the first message arrives */
+  background-color: #0A253C;
+  color: #00D924;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: var(--radius);
+  font-size:0.7em;
+}
