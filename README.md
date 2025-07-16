@@ -1,116 +1,87 @@
-<!-- # Getting Started with Create React App
+# ⚽ StonksBall – Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Questo è il repository **Frontend** del progetto _StonksBall_, un'applicazione web sviluppata come progetto finale del corso Full Stack Developer EPICODE.  
+L’app consente agli utenti di organizzare partite di calcetto, partecipare, gestire la propria disponibilità e interagire con gli altri membri.
 
-## Available Scripts
+🔗 **Backend repository**:  
+[https://github.com/nellocas01/Capstone-Project-FS0123-](https://github.com/nellocas01/Capstone-Project-FS0123-)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🎯 Obiettivi del progetto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Fornire un’interfaccia utente chiara, dinamica e responsive per la gestione delle partite.
+- Interagire con il backend tramite API REST per autenticazione, partite e profilo utente.
+- Offrire una UX moderna e fluida grazie a React e Bootstrap.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ✅ Funzionalità implementate
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Registrazione e login utente** con JWT
+- **Visualizzazione e partecipazione a partite**
+- **Creazione di una nuova partita** con data, ora, luogo
+- **Gestione profilo personale**
+- **UI responsive** e mobile-friendly
+- **Integrazione Stripe (mock)** per gestione pagamenti
+- **Gestione stato globale e navigazione sicura**
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Tecnologie & Dipendenze
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Libreria / Tool                     | Descrizione                                  |
+|------------------------------------|----------------------------------------------|
+| **React 18**                       | Framework per la UI                          |
+| **React Router DOM**               | Routing SPA                                  |
+| **React Bootstrap / Bootstrap 5**  | Componenti UI responsive                     |
+| **Bootstrap Icons**                | Icone leggere e accessibili                  |
+| **Axios**                          | Richieste HTTP verso il backend              |
+| **Date-fns**                       | Gestione e formattazione date                |
+| **React Datepicker / Time Picker** | Selezione data e ora partita                 |
+| **Stripe / React Stripe JS**       | Integrazione mock per pagamento              |
+| **FontAwesome / Bootstrap Icons** | Icone per UI                                 |
+| **Testing Library + Jest**         | Test dei componenti                          |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## ⚙️ Setup e avvio del progetto
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Clona il repository
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone https://github.com/nellocas01/Capstone-Project-FS0123-FrontEnd.git
+cd Capstone-Project-FS0123-FrontEnd
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. Installa le dipendenze
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+```
 
-## Learn More
+### 3. Configura l’ambiente
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Crea un file .env nella root con:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```env
+REACT_APP_API_BASE_URL=http://localhost:8080/api
+REACT_APP_STRIPE_PUBLIC_KEY=pk_test_XXXXXXXXXXXXXXXXXXXXXXXX
+Assicurati che l’URL punti al tuo backend locale.
+```
 
-### Code Splitting
+### 4. Avvia l’app in modalità sviluppo
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+L’app sarà disponibile su http://localhost:3000
 
-### Analyzing the Bundle Size
+Assicurati che il backend (porta 8080) sia già avviato per evitare errori CORS o di rete.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
-
-# Capstone-Project-FS0123-
-
-Progetto finale FrontEnd del corso Full Stack Developer di EPICODE
-
-BackEnd Repository :
-https://github.com/nellocas01/Capstone-Project-FS0123- 
-
-# Organizzazione Partite di Calcetto⚽
-Benvenuto nel repository del progetto di organizzazione partite di calcetto. Questo progetto consiste nello sviluppo di un'applicazione web che permette agli utenti di organizzare partite di calcetto, unire a partite esistenti e gestire i dettagli delle partite in modo semplice e intuitivo.🔥
-
-## Descrizione
-"StonksBall" è una piattaforma innovativa che mette insieme gli appassionati di calcetto di ogni livello e permette loro di creare e partecipare a partite entusiasmanti. Con questa applicazione, puoi organizzare partite con i tuoi amici o trovare nuove persone con cui giocare nella tua zona.
-
-Non importa se sei un giocatore esperto o un principiante, "StonksBall" ti offre un'esperienza completa per la gestione delle partite di calcetto. Puoi creare nuove partite, specificare la data, l'orario e il luogo.
-
-"StonksBall" ti fornisce anche una panoramica completa delle informazioni relative alle partite, incluso il luogo, l'orario e altre informazioni utili.
-
-Sia che tu voglia organizzare una partita con i tuoi amici, trovare nuove persone con cui giocare o semplicemente partecipare a partite di calcio entusiasmanti, "StonksBall" è qui per rendere tutto più semplice e divertente.
-
-## Funzionalità🎯
-
-- Creazione di partite: Gli utenti possono creare nuove partite specificando la data, l'orario e il luogo.
-- Partecipazione a partite: Gli utenti possono cercare partite esistenti e unirsi a quelle di loro interesse se risultano essere "in attesa" di conferma.
-- Visualizzazione delle informazioni: Le partite includono dettagli come il luogo, l'orario e altre informazioni utili.
-- Gestione delle partite: Gli admin possono modificare o cancellare le partite create dagli utenti.
-- Sistema di autenticazione: per garantire la sicurezza, è presente un sistema di autenticazione sicuro basato su token JWT, per registrare nuovi utenti e accedere all'applicazione.
-
-## Obiettivi🎯
-
-L'obiettivo principale di questo progetto è fornire agli appassionati di calcetto una piattaforma semplice e conveniente per organizzare partite e partecipare a eventi sportivi nella loro zona. Alcuni obiettivi specifici saranno:
-
- - Creare un'interfaccia utente intuitiva e user-friendly per semplificare la navigazione e l'utilizzo dell'applicazione.
- - Implementare un sistema di autenticazione sicuro per proteggere i dati degli utenti.
- - Garantire una gestione efficiente delle partite, consentendo agli admin di modificare o cancellare le partite create da loro.
- - Offrire un'esperienza piacevole agli utenti, facilitando la ricerca e la partecipazione a partite di loro interesse.
-
-## Tecnologie utilizzate💻
-
-- Linguaggi di programmazione: HTML, CSS, JavaScript, Java
-- Framework e librerie: React-Bootstrap, Spring
-- Altre tecnologie: PostgreSQL, Postman
-
-Speriamo che tu trovi questo progetto interessante e utile. Se hai domande o suggerimenti, non esitare a contattarmi.😄
-
-Buon divertimento e buon calcetto!🏆⚽
+## 👨‍💻 Autore
+**Aniello Casolla**
+- 📧 nellocasolla446@gmail.com
+- 📆 Ultimo aggiornamento: Luglio 2023
